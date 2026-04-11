@@ -159,6 +159,17 @@ p {
   color: var(--black);
 }
 
+.kalender-inner p a {
+  color: var(--black);
+  border-bottom: 1px solid var(--accent);
+  text-decoration: none;
+}
+
+.kalender-inner p a:hover {
+  color: var(--muted);
+  border-color: transparent;
+}
+
 /* ── Kalender ── */
 .kalender {
   border-bottom: 1px solid var(--border);
@@ -173,15 +184,22 @@ p {
 }
 
 .calendar-wrapper {
+  position: relative;
   margin-top: 2.5rem;
   border: 1px solid var(--border);
   background: #fff;
   overflow: hidden;
+  /* 600/800 = 75% — matches the iframe's native aspect ratio */
+  padding-bottom: 75%;
+  height: 0;
 }
 
 .calendar-wrapper iframe {
-  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
+  height: 100%;
   border: none;
 }
 
