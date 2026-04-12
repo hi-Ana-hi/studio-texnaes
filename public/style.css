@@ -1,7 +1,7 @@
 :root {
   --black: #111111;
   --white: #f8f6f2;
-  --accent: #c8b89a;
+  --accent: #d4a843;
   --muted: #7a7570;
   --border: #e0dbd4;
 }
@@ -51,7 +51,7 @@ nav a {
 }
 
 nav a:hover {
-  color: var(--black);
+  color: var(--accent);
 }
 
 /* ── Hero ── */
@@ -69,7 +69,7 @@ nav a:hover {
   font-size: 0.72rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--accent);
   margin-bottom: 2rem;
 }
 
@@ -107,7 +107,7 @@ section {
   font-size: 0.72rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--accent);
   margin-bottom: 1.5rem;
 }
 
@@ -149,7 +149,7 @@ p {
   font-size: 0.8rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--accent);
   margin-bottom: 0.5rem;
   font-weight: normal;
 }
@@ -283,7 +283,7 @@ p {
 }
 
 .contact-form button:hover {
-  background: #333;
+  background: var(--accent);
 }
 
 .contact-form button:disabled {
