@@ -3,6 +3,7 @@ import express from 'express'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import nodemailer from 'nodemailer'
+import rateLimit from 'express-rate-limit'
 
 const app = express()
 const PORT = process.env.PORT || 3000
@@ -10,6 +11,12 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.json())
+
+const contactLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutter
+  max: 5,
+  message: { error: 'For mange forsøk. Prøv igjen om 15 minutter.' },
+})
 
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
@@ -21,7 +28,7 @@ const transporter = nodemailer.createTransport({
   },
 })
 
-app.post('/contact', async (req, res) => {
+app.post('/contact', contactLimiter, async (req, res) => {
   const { name, email, message } = req.body
 
   if (!name || !email || !message) {
