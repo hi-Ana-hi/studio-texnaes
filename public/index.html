@@ -81,6 +81,26 @@
       <p class="section-label">Kontakt</p>
       <h2>Ta kontakt</h2>
       <p>Vi svarer gjerne på spørsmål om studio, leie og samarbeid.</p>
+
+      <form class="contact-form" id="contactForm">
+        <div class="form-row">
+          <label for="name">Navn</label>
+          <input type="text" id="name" name="name" required placeholder="Ditt navn" />
+        </div>
+        <div class="form-row">
+          <label for="email">E-post</label>
+          <input type="email" id="email" name="email" required placeholder="din@epost.no" />
+        </div>
+        <div class="form-row">
+          <label for="message">Melding</label>
+          <textarea id="message" name="message" rows="5" required placeholder="Skriv din melding her..."></textarea>
+        </div>
+        <div class="form-footer">
+          <p class="form-status" id="formStatus" aria-live="polite"></p>
+          <button type="submit">Send melding</button>
+        </div>
+      </form>
+
       <div class="kontakt-links">
         <div class="kontakt-row">
           <span class="kontakt-type">Generelt</span>
@@ -93,6 +113,50 @@
       </div>
     </div>
   </div>
+
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', async (e) => {
+      e.preventDefault()
+      const form = e.target
+      const status = document.getElementById('formStatus')
+      const btn = form.querySelector('button')
+
+      btn.disabled = true
+      btn.textContent = 'Sender...'
+      status.textContent = ''
+      status.className = 'form-status'
+
+      const body = {
+        name: form.name.value,
+        email: form.email.value,
+        message: form.message.value,
+      }
+
+      try {
+        const res = await fetch('/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body),
+        })
+        const data = await res.json()
+
+        if (res.ok) {
+          status.textContent = 'Meldingen er sendt. Vi tar kontakt snart.'
+          status.classList.add('form-status--ok')
+          form.reset()
+        } else {
+          status.textContent = data.error || 'Noe gikk galt.'
+          status.classList.add('form-status--error')
+        }
+      } catch {
+        status.textContent = 'Noe gikk galt. Prøv igjen.'
+        status.classList.add('form-status--error')
+      } finally {
+        btn.disabled = false
+        btn.textContent = 'Send melding'
+      }
+    })
+  </script>
 
   <!-- Footer -->
   <footer>
