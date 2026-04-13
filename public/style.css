@@ -62,7 +62,7 @@ nav a:hover {
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 8rem 2rem 7rem;
+  padding: 6rem 6rem 5rem;
   border-bottom: 1px solid var(--border);
 }
 
@@ -83,15 +83,15 @@ nav a:hover {
 }
 
 .hero p {
-  margin-top: 2rem;
+  margin-top: 1rem;
   font-size: 1.05rem;
   color: var(--muted);
-  max-width: 40ch;
+  max-width: 70ch;
   font-style: italic;
 }
 
 .hero-cta {
-  margin-top: 0.5rem;
+  margin-top: 0.75rem;
   font-style: italic;
   color: var(--accent-pink) !important;
 }
