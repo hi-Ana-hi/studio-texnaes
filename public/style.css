@@ -124,6 +124,45 @@ p {
   max-width: 60ch;
 }
 
+/* ── Velkommen-seksjon ── */
+.velkommen {
+  border-bottom: 1px solid var(--border);
+  max-width: 100%;
+  padding: 0;
+}
+
+.velkommen-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 6rem 4rem;
+}
+
+.velkommen-inner h2 {
+  margin-bottom: 1rem;
+}
+
+.velkommen-tagline {
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  color: var(--accent) !important;
+  font-style: italic;
+  margin-bottom: 2rem !important;
+  max-width: none !important;
+}
+
+.velkommen-inner p {
+  margin-top: 1rem;
+  max-width: 58ch;
+}
+
+.velkommen-cta {
+  margin-top: 2rem !important;
+  font-size: 1rem;
+  letter-spacing: 0.12em;
+  color: var(--accent-pink) !important;
+  font-style: italic;
+}
+
 /* ── Leie-seksjon ── */
 .leie {
   border-top: 1px solid var(--border);
@@ -378,6 +417,7 @@ footer span {
     padding: 4rem 1.5rem;
   }
 
+  .velkommen-inner,
   .leie-inner,
   .kalender-inner,
   .kontakt-inner {
