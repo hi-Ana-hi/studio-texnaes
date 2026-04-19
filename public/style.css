@@ -486,6 +486,20 @@ p {
   color: #8b4444;
 }
 
+.kart-wrapper {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.kart-wrapper iframe {
+  width: 100%;
+  height: 280px;
+  border: none;
+  display: block;
+}
+
 .kontakt-links {
   display: flex;
   flex-direction: column;
