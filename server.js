@@ -1,6 +1,7 @@
 import 'dotenv/config'
 import express from 'express'
 import path from 'path'
+import fs from 'fs'
 import { fileURLToPath } from 'url'
 import nodemailer from 'nodemailer'
 import rateLimit from 'express-rate-limit'
@@ -11,6 +12,35 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.json())
+
+app.get('/studioT.mp4', (req, res) => {
+  const filePath = path.join(__dirname, 'public', 'studioT.mp4')
+  const stat = fs.statSync(filePath)
+  const fileSize = stat.size
+  const range = req.headers.range
+
+  if (range) {
+    const [startStr, endStr] = range.replace(/bytes=/, '').split('-')
+    const start = parseInt(startStr, 10)
+    const end = endStr ? parseInt(endStr, 10) : fileSize - 1
+    const chunkSize = end - start + 1
+    const stream = fs.createReadStream(filePath, { start, end })
+    res.writeHead(206, {
+      'Content-Range': `bytes ${start}-${end}/${fileSize}`,
+      'Accept-Ranges': 'bytes',
+      'Content-Length': chunkSize,
+      'Content-Type': 'video/mp4',
+    })
+    stream.pipe(res)
+  } else {
+    res.writeHead(200, {
+      'Content-Length': fileSize,
+      'Content-Type': 'video/mp4',
+      'Accept-Ranges': 'bytes',
+    })
+    fs.createReadStream(filePath).pipe(res)
+  }
+})
 
 const contactLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutter
