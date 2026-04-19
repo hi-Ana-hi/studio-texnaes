@@ -59,21 +59,53 @@ nav a:hover {
 
 /* ── Hero ── */
 .hero {
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  transition: opacity 1.5s ease;
+}
+
+.hero-video--b {
+  opacity: 0;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(253, 240, 238, 0.82);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   text-align: center;
   padding: 6rem 6rem 5rem;
-  border-bottom: 1px solid var(--border);
 }
 
 .hero-label {
-  font-size: 0.72rem;
+  font-size: 0.95rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent) !important;
   margin-bottom: 0.4rem;
+  text-shadow: none;
 }
 
 .hero h1 {
@@ -87,7 +119,7 @@ nav a:hover {
 .hero p {
   margin-top: 1rem;
   font-size: 1.05rem;
-  color: var(--muted);
+  color: var(--black);
   max-width: 90ch;
   font-style: italic;
 }
@@ -95,7 +127,7 @@ nav a:hover {
 .hero-cta {
   margin-top: 0.75rem;
   font-style: italic;
-  color: var(--accent-pink) !important;
+  color: #b85c7a !important;
 }
 
 .hero-divider {
@@ -133,32 +165,145 @@ p {
 }
 
 
+/* ── Om oss ── */
+.om-oss {
+  border-bottom: 1px solid var(--border);
+  max-width: 100%;
+  padding: 0;
+}
+
+.om-oss-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 7rem 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.om-oss-inner h2 {
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  margin-bottom: 2rem;
+}
+
+.om-oss-inner p {
+  font-size: 1.15rem;
+  font-style: italic;
+  color: var(--muted);
+  max-width: 56ch;
+}
+
+.om-oss-inner p + p {
+  margin-top: 0.75rem;
+}
+
+.om-oss-cta {
+  color: #b85c7a !important;
+  font-size: 1.25rem !important;
+  margin-top: 1.5rem !important;
+}
+
+/* ── Instruktører ── */
+.instruktorer-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 4rem;
+  width: 100%;
+}
+
+.instruktør-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  transition: border-color 0.4s;
+}
+
+.instruktør-card:hover {
+  border-color: var(--accent);
+}
+
+.instruktør-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center center;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.instruktør-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(17, 17, 17, 0.55);
+}
+
+.instruktør-card:hover .instruktør-bg {
+  opacity: 1;
+}
+
+.instruktør-info {
+  position: relative;
+  z-index: 1;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  transition: color 0.4s;
+}
+
+.instruktør-navn {
+  font-size: 0.95rem;
+  letter-spacing: 0.03em;
+  color: var(--black);
+  transition: color 0.4s;
+}
+
+.instruktør-fag {
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-style: italic;
+  transition: color 0.4s;
+}
+
+.instruktør-card:hover .instruktør-navn {
+  color: var(--white);
+}
+
+.instruktør-card:hover .instruktør-fag {
+  color: var(--accent);
+}
+
 /* ── Leie-seksjon ── */
 .leie {
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
   max-width: 100%;
   padding: 0;
-  position: relative;
-  background-image: url('/studioT.png');
-  background-size: cover;
-  background-position: center 30%;
-}
-
-.leie::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(253, 240, 238, 0.88);
-  z-index: 0;
 }
 
 .leie-inner {
-  position: relative;
-  z-index: 1;
   max-width: 900px;
   margin: 0 auto;
   padding: 6rem 4rem;
+}
+
+.leie-image {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  object-position: center 70%;
+  display: block;
+  margin-top: 3rem;
+  filter: blur(0.4px) contrast(1.05) saturate(1.1) brightness(1.02);
 }
 
 .leie-grid {
@@ -195,6 +340,7 @@ p {
 
 /* ── Kalender ── */
 .kalender {
+  display: none;
   border-bottom: 1px solid var(--border);
   max-width: 100%;
   padding: 0;
@@ -392,7 +538,7 @@ footer span {
     margin: 0 0.75rem;
   }
 
-  .hero {
+  .hero-content {
     padding: 5rem 1.5rem 5rem;
   }
 
@@ -400,11 +546,17 @@ footer span {
     padding: 4rem 1.5rem;
   }
 
+  .instruktorer-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .om-oss-inner,
   .leie-inner,
   .kalender-inner,
   .kontakt-inner {
     padding: 4rem 1.5rem;
   }
+
 
   .leie-grid {
     grid-template-columns: 1fr;

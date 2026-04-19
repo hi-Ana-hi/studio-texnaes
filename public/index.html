@@ -14,50 +14,110 @@
   <header>
     <a href="/" class="logo">Studio Texnæs</a>
     <nav>
+      <a href="#om-oss">Om oss</a>
       <a href="#leie">Leie</a>
-      <a href="#kalender">Kalender</a>
+
       <a href="#kontakt">Kontakt</a>
     </nav>
   </header>
 
   <!-- Hero -->
   <div class="hero">
-    <h1>Et rom for bevegelse</h1>
-    <p class="hero-label">Velkommen til Studio Texnæs</p>
-    <p>Nytt kapittel. Sommeren 2026.</p>
-    <p>Vi er Anahi og Tone fra ArteSana Flamencoskole, og dette er vår visjon. Et rom der kropp, kunst og fellesskap møtes.</p>
-    <p>Det som alltid har gjort dette stedet spesielt tar vi med oss &ndash; og vi gleder oss til å bygge videre,<br>sammen med Kyrre og dere.</p>
-    <p class="hero-cta">Bli med!</p>
-    <div class="hero-divider"></div>
+    <video autoplay muted playsinline aria-hidden="true" tabindex="-1" class="hero-video" id="heroVideoA">
+      <source src="/studioT.mp4" type="video/mp4" />
+    </video>
+    <video muted playsinline aria-hidden="true" tabindex="-1" class="hero-video hero-video--b" id="heroVideoB">
+      <source src="/studioT.mp4" type="video/mp4" />
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>Et rom for bevegelse</h1>
+      <p class="hero-label">Velkommen til Studio Texnæs</p>
+      <p>Nytt kapittel. Sommeren 2026.</p>
+      <p>Vi er Anahi og Tone fra ArteSana Flamencoskole, og dette er vår visjon. Et rom der kropp, kunst og fellesskap møtes.</p>
+      <p>Det som alltid har gjort dette stedet spesielt tar vi med oss &ndash; og vi gleder oss til å bygge videre,<br>sammen med Kyrre og dere.</p>
+      <p class="hero-cta">Bli med!</p>
+      <div class="hero-divider"></div>
+    </div>
+  </div>
+
+  <!-- Om oss -->
+  <div class="om-oss" id="om-oss">
+    <div class="om-oss-inner">
+      <p class="section-label">Om oss</p>
+      <h2>Hvem er vi?</h2>
+      <p>Studio Texnæs er et levende miljø der ulike disipliner møtes. Hos oss finner du flamenco, samba, burlesque, kungfu, dancehall og mye mer – drevet av engasjerte instruktører som brenner for det de gjør.</p>
+      <p class="om-oss-cta">Alle er velkomne!</p>
+      <div class="hero-divider"></div>
+
+      <div class="instruktorer-grid">
+        <a class="instruktør-card" href="https://kyrretexnaes.com/" target="_blank" rel="noopener">
+          <div class="instruktør-bg" style="background-image: url('/kyrre.jpg'); background-position: center 20%;"></div>
+          <div class="instruktør-info">
+            <span class="instruktør-navn">Kyrre Texnæs</span>
+            <span class="instruktør-fag">Creator of Movements</span>
+          </div>
+        </a>
+        <a class="instruktør-card" href="https://artesanaflamenco.no/" target="_blank" rel="noopener">
+          <div class="instruktør-bg" style="background-image: url('/artesana.jpg')"></div>
+          <div class="instruktør-info">
+            <span class="instruktør-navn">ArteSana Flamencoskole</span>
+            <span class="instruktør-fag">Flamenco</span>
+          </div>
+        </a>
+        <a class="instruktør-card" href="https://www.kikicherie.com/" target="_blank" rel="noopener">
+          <div class="instruktør-bg" style="background-image: url('/kiki.jpg'); background-position: center 15%; background-size: 130%;"></div>
+          <div class="instruktør-info">
+            <span class="instruktør-navn">Kiki Cherie</span>
+            <span class="instruktør-fag">Burlesque</span>
+          </div>
+        </a>
+        <a class="instruktør-card" href="https://www.jennygjerlow.com/" target="_blank" rel="noopener">
+          <div class="instruktør-bg" style="background-image: url('/jenny.jpg')"></div>
+          <div class="instruktør-info">
+            <span class="instruktør-navn">Jenny</span>
+            <span class="instruktør-fag">Samba</span>
+          </div>
+        </a>
+        <a class="instruktør-card" href="https://centerlinekungfu.no/" target="_blank" rel="noopener">
+          <div class="instruktør-bg" style="background-image: url('/centerline.jpg'); background-position: center 12%;"></div>
+          <div class="instruktør-info">
+            <span class="instruktør-navn">Centerline Kungfu</span>
+            <span class="instruktør-fag">Kungfu</span>
+          </div>
+        </a>
+        <a class="instruktør-card" href="https://www.instagram.com/p/CWmXyYpo7nI/" target="_blank" rel="noopener">
+          <div class="instruktør-bg" style="background-image: url('/alonka.jpg')"></div>
+          <div class="instruktør-info">
+            <span class="instruktør-navn">Alonka</span>
+            <span class="instruktør-fag">Dancehall</span>
+          </div>
+        </a>
+      </div>
+    </div>
   </div>
 
   <!-- Leie -->
   <div class="leie" id="leie">
     <div class="leie-inner">
-      <p class="section-label">Romutleie</p>
-      <h2>Leie av studio</h2>
-      <p>
-        Studio Texnæs er tilgjengelig for leie til dans, prøver, workshops og andre bevegelsesbaserte aktiviteter.
-        Rommet er lyst, romslig og utstyrt for profesjonell bruk.
-      </p>
+      <p class="section-label">Utleie</p>
+      <h2>Lei studioet</h2>
+      <p>Studio Texnæs er et lyst og romslig studio i Oslo, tilgjengelig for leie til dans, yoga og mye mer.</p>
       <div class="leie-grid">
         <div class="leie-item">
-          <h3>Egnet for</h3>
-          <p>Dans, koreografi, prøver, workshops, bevegelsesklasser og private treningsøkter.</p>
+          <h3>Passer for</h3>
+          <p>Yoga, pilates, meditasjon, dans, koreografi, prøver, workshops, bevegelsesklasser, private treningsøkter, bursdager, utdrikningslag og mindre events.</p>
         </div>
         <div class="leie-item">
-          <h3>Fasiliteter</h3>
-          <p>Speilet vegg, dansegulv, lydanlegg og garderobe med dusj.</p>
+          <h3>I studioet finner du</h3>
+          <p>Speilet vegg, dansegulv, lydanlegg, garderobe og bad med dusj.</p>
         </div>
         <div class="leie-item">
-          <h3>Booking</h3>
-          <p>Se tilgjengelighet i kalenderen nedenfor, og send forespørsel på e-post.</p>
-        </div>
-        <div class="leie-item">
-          <h3>Kontakt</h3>
-          <p>For priser og spørsmål om leie, kontakt oss på <a href="mailto:leie@studio-texnaes.no" style="color: inherit; border-bottom: 1px solid var(--accent);">leie@studio-texnaes.no</a></p>
+          <h3>Slik booker du</h3>
+          <p>Send oss en forespørsel på <a href="mailto:leie@studio-texnaes.no" style="color: inherit; border-bottom: 1px solid var(--accent);">leie@studio-texnaes.no</a> – så hører vi fra oss så snart vi kan!</p>
         </div>
       </div>
+      <img src="/studioT.png" alt="Studio Texnæs" class="leie-image" />
     </div>
   </div>
 
@@ -160,6 +220,42 @@
         btn.textContent = 'Send melding'
       }
     })
+  </script>
+
+  <script>
+    (function () {
+      const FADE = 1.5   // seconds — must match CSS transition
+      const CUE  = FADE + 0.2
+
+      const a = document.getElementById('heroVideoA')
+      const b = document.getElementById('heroVideoB')
+      let fading = false
+
+      function crossfade(outgoing, incoming) {
+        fading = true
+        incoming.currentTime = 0
+        incoming.play()
+        outgoing.style.opacity = '0'
+        incoming.style.opacity = '1'
+        setTimeout(() => {
+          outgoing.pause()
+          outgoing.currentTime = 0
+          fading = false
+          watchEnd(incoming, outgoing)
+        }, FADE * 1000)
+      }
+
+      function watchEnd(current, next) {
+        current.addEventListener('timeupdate', function handler() {
+          if (!fading && current.duration && current.currentTime >= current.duration - CUE) {
+            current.removeEventListener('timeupdate', handler)
+            crossfade(current, next)
+          }
+        })
+      }
+
+      watchEnd(a, b)
+    })()
   </script>
 
   <!-- Footer -->
