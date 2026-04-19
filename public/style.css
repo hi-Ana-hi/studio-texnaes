@@ -145,7 +145,7 @@ section {
 }
 
 .section-label {
-  font-size: 0.72rem;
+  font-size: 0.83rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--accent);
@@ -314,7 +314,7 @@ p {
 }
 
 .leie-item h3 {
-  font-size: 0.8rem;
+  font-size: 0.92rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--accent);
