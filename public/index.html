@@ -262,7 +262,48 @@
   <footer>
     <div>Studio Texnæs &mdash; Oslo</div>
     <span>Et rom for bevegelse</span>
+    <button class="footer-personvern-link" onclick="document.getElementById('personvernModal').classList.add('open')">Personvern &amp; cookies</button>
   </footer>
+
+  <!-- Cookie banner -->
+  <div class="cookie-banner" id="cookieBanner">
+    <p>Vi bruker informasjonskapsler for å vise innebygd kalenderinnhold (Google Calendar). Ved å fortsette godtar du dette. <button class="cookie-link" onclick="document.getElementById('personvernModal').classList.add('open')">Les mer</button></p>
+    <button class="cookie-accept" onclick="acceptCookies()">Forstått</button>
+  </div>
+
+  <!-- Personvern modal -->
+  <div class="modal-backdrop" id="personvernModal" onclick="if(event.target===this)this.classList.remove('open')">
+    <div class="modal">
+      <button class="modal-close" onclick="document.getElementById('personvernModal').classList.remove('open')">&times;</button>
+      <h2>Personvern &amp; cookies</h2>
+
+      <h3>Hvem er vi</h3>
+      <p>Studio Texnæs er et dansestudio i Oslo. Kontakt: <a href="mailto:hei@studio-texnaes.no">hei@studio-texnaes.no</a></p>
+
+      <h3>Hvilke data samler vi inn</h3>
+      <p>Når du sender oss en melding via kontaktskjemaet, samler vi inn navn, e-postadresse og meldingsteksten du skriver. Disse opplysningene brukes kun til å besvare henvendelsen din og lagres ikke utover det.</p>
+
+      <h3>Informasjonskapsler (cookies)</h3>
+      <p>Nettsiden bruker innebygd Google Calendar for å vise studioets tilgjengelighet. Google kan sette informasjonskapsler i forbindelse med dette. Vi bruker ikke egne sporings- eller analysecookies.</p>
+      <p>For mer informasjon om Googles behandling av data, se <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Googles personvernpolicy</a>.</p>
+
+      <h3>Dine rettigheter</h3>
+      <p>Du har rett til innsyn i, retting av og sletting av personopplysninger vi har om deg. Ta kontakt på <a href="mailto:hei@studio-texnaes.no">hei@studio-texnaes.no</a> for å utøve disse rettighetene.</p>
+
+      <h3>Endringer</h3>
+      <p>Denne erklæringen kan oppdateres. Siste versjon vil alltid være tilgjengelig på denne siden.</p>
+    </div>
+  </div>
+
+  <script>
+    function acceptCookies() {
+      localStorage.setItem('cookies-accepted', '1')
+      document.getElementById('cookieBanner').classList.remove('show')
+    }
+    if (!localStorage.getItem('cookies-accepted')) {
+      document.getElementById('cookieBanner').classList.add('show')
+    }
+  </script>
 
 </body>
 </html>

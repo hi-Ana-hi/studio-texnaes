@@ -377,9 +377,22 @@ p {
   border-bottom: 1px solid var(--border);
   max-width: 100%;
   padding: 0;
+  position: relative;
+  background-image: url('/flamingo-4.jpg');
+  background-size: cover;
+  background-position: center center;
+}
+
+.kontakt::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(253, 248, 245, 0.94);
+  pointer-events: none;
 }
 
 .kontakt-inner {
+  position: relative;
   max-width: 900px;
   margin: 0 auto;
   padding: 6rem 4rem;
@@ -525,6 +538,151 @@ footer span {
   font-style: italic;
 }
 
+/* ── Cookie banner ── */
+.cookie-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--black);
+  color: var(--white);
+  padding: 1.2rem 2rem;
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  z-index: 100;
+  font-size: 0.85rem;
+}
+
+.cookie-banner.show {
+  display: flex;
+}
+
+.cookie-banner p {
+  color: var(--white);
+  max-width: none;
+  margin: 0;
+}
+
+.cookie-link {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+}
+
+.cookie-accept {
+  background: var(--white);
+  color: var(--black);
+  border: none;
+  padding: 0.5rem 1.5rem;
+  font-family: inherit;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+
+.cookie-accept:hover {
+  background: var(--accent);
+}
+
+/* ── Personvern modal ── */
+.modal-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 17, 17, 0.6);
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.modal-backdrop.open {
+  display: flex;
+}
+
+.modal {
+  background: var(--white);
+  max-width: 620px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 3rem;
+  position: relative;
+}
+
+.modal h2 {
+  font-size: 1.4rem;
+  font-weight: normal;
+  margin-bottom: 2rem;
+}
+
+.modal h3 {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-top: 1.8rem;
+  margin-bottom: 0.5rem;
+  font-weight: normal;
+}
+
+.modal p {
+  font-size: 0.95rem;
+  color: #3d3a37;
+  max-width: none;
+}
+
+.modal p + p {
+  margin-top: 0.5rem;
+}
+
+.modal a {
+  color: var(--black);
+  border-bottom: 1px solid var(--accent);
+  text-decoration: none;
+}
+
+.modal-close {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.5rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--muted);
+  line-height: 1;
+}
+
+.modal-close:hover {
+  color: var(--black);
+}
+
+.footer-personvern-link {
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 0.78rem;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  padding: 0;
+}
+
+.footer-personvern-link:hover {
+  color: var(--accent-pink);
+}
+
 /* ── Responsive ── */
 @media (max-width: 700px) {
   header {
@@ -556,6 +714,7 @@ footer span {
   .kontakt-inner {
     padding: 4rem 1.5rem;
   }
+
 
 
   .leie-grid {
