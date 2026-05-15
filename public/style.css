@@ -301,7 +301,6 @@ p {
   height: auto;
   display: block;
   margin-top: 3rem;
-  filter: blur(0.4px) contrast(1.05) saturate(1.1) brightness(1.02);
 }
 
 .leie-grid {
