@@ -88,6 +88,39 @@ app.post('/contact', contactLimiter, async (req, res) => {
   }
 })
 
+app.get('/tilgjengelighet', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'tilgjengelighet.html'))
+})
+
+app.post('/contact-leie', contactLimiter, async (req, res) => {
+  const { name, email, message } = req.body
+
+  if (!name || !email || !message) {
+    return res.status(400).json({ error: 'Alle felt må fylles ut.' })
+  }
+
+  try {
+    await transporter.sendMail({
+      from: `"Studio Texnæs" <${process.env.SMTP_USER}>`,
+      to: 'leie@studio-texnaes.no',
+      replyTo: email,
+      subject: `Leieforespørsel fra ${name}`,
+      text: `Navn: ${name}\nE-post: ${email}\n\n${message}`,
+      html: `
+        <p><strong>Navn:</strong> ${name}</p>
+        <p><strong>E-post:</strong> ${email}</p>
+        <br>
+        <p>${message.replace(/\n/g, '<br>')}</p>
+      `,
+    })
+
+    res.json({ ok: true })
+  } catch (err) {
+    console.error('Mail error:', err)
+    res.status(500).json({ error: 'Kunne ikke sende melding. Prøv igjen senere.' })
+  }
+})
+
 app.listen(PORT, () => {
   console.log(`Studio Texnæs running at http://localhost:${PORT}`)
 })

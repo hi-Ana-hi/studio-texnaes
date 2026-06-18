@@ -57,6 +57,10 @@ nav a:hover {
   color: var(--accent-pink);
 }
 
+nav a.nav-active {
+  color: var(--accent);
+}
+
 /* ── Hero ── */
 .hero {
   position: relative;
@@ -336,6 +340,10 @@ p {
 }
 
 /* ── Kalender ── */
+.kalender--visible {
+  display: block !important;
+}
+
 .kalender {
   display: none;
   border-bottom: 1px solid var(--border);

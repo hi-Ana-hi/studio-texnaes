@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tilgjengelighet – Studio Texnæs</title>
+  <meta name="description" content="Se tilgjengelighet og lei Studio Texnæs – et lyst og romslig dansestudio på Vulkan i Oslo." />
+  <link rel="canonical" href="https://studio-texnaes.no/tilgjengelighet" />
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <a href="/" class="logo">Studio Texnæs</a>
+    <nav>
+      <a href="/#om-oss">Om oss</a>
+      <a href="/#leie">Leie</a>
+      <a href="/tilgjengelighet" class="nav-active">Tilgjengelighet</a>
+      <a href="/#kontakt">Kontakt</a>
+    </nav>
+  </header>
+
+  <!-- Leie-info -->
+  <div class="leie" id="leie">
+    <div class="leie-inner">
+      <p class="section-label">Utleie</p>
+      <h2>Lei studioet</h2>
+      <p>Et lyst og romslig studio på Vulkan – med speilet vegg, dansegulv, lydanlegg og garderobe med dusj. Passer til dans, yoga, workshops, private arrangementer og mye mer. Gunstige priser for faste leietakere på morgen og formiddag. <a href="/#leie" style="color: inherit; border-bottom: 1px solid var(--accent);">Les mer om leie</a>.</p>
+    </div>
+  </div>
+
+  <!-- Kalender -->
+  <div class="kalender kalender--visible" id="kalender">
+    <div class="kalender-inner">
+      <p class="section-label">Tilgjengelighet</p>
+      <h2>Ledige tider</h2>
+      <p>Kalenderen viser når studioet er opptatt. Ser du et ledig tidspunkt? Send oss en forespørsel nedenfor!</p>
+      <div class="calendar-wrapper">
+        <iframe
+          src="https://calendar.google.com/calendar/embed?src=c_772c9d8ac26f73423463b3c7ee6c5c4d9ccd35819da1884f4849e5246e5fc5b7%40group.calendar.google.com&ctz=Europe%2FOslo"
+          style="border: 0"
+          frameborder="0"
+          scrolling="no"
+          title="Studio Texnæs kalender"
+        ></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- Kontakt / leieforespørsel -->
+  <div class="kontakt" id="kontakt">
+    <div class="kontakt-inner">
+      <p class="section-label">Leieforespørsel</p>
+      <h2>Send en forespørsel</h2>
+      <p>Fortell oss litt om hva du trenger – dato, tidspunkt og hva du skal bruke studioet til – så tar vi kontakt så snart vi kan.</p>
+
+      <form class="contact-form" id="leieForm">
+        <div class="form-row">
+          <label for="name">Navn</label>
+          <input type="text" id="name" name="name" required placeholder="Ditt navn" />
+        </div>
+        <div class="form-row">
+          <label for="email">E-post</label>
+          <input type="email" id="email" name="email" required placeholder="din@epost.no" />
+        </div>
+        <div class="form-row">
+          <label for="message">Melding</label>
+          <textarea id="message" name="message" rows="5" required placeholder="Dato, tidspunkt, antall deltakere, hva skal du bruke studioet til..."></textarea>
+        </div>
+        <div class="form-footer">
+          <p class="form-status" id="leieFormStatus" aria-live="polite"></p>
+          <button type="submit">Send forespørsel</button>
+        </div>
+      </form>
+
+      <div class="kontakt-links">
+        <div class="kontakt-row">
+          <span class="kontakt-type">Leie</span>
+          <a href="mailto:leie@studio-texnaes.no">leie@studio-texnaes.no</a>
+        </div>
+        <div class="kontakt-row">
+          <span class="kontakt-type">Adresse</span>
+          <span>Vulkan 30, 0175 Oslo</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('leieForm').addEventListener('submit', async (e) => {
+      e.preventDefault()
+      const form = e.target
+      const status = document.getElementById('leieFormStatus')
+      const btn = form.querySelector('button')
+
+      btn.disabled = true
+      btn.textContent = 'Sender...'
+      status.textContent = ''
+      status.className = 'form-status'
+
+      const body = {
+        name: form.name.value,
+        email: form.email.value,
+        message: form.message.value,
+      }
+
+      try {
+        const res = await fetch('/contact-leie', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body),
+        })
+        const data = await res.json()
+
+        if (res.ok) {
+          status.textContent = 'Forespørselen er sendt. Vi tar kontakt snart.'
+          status.classList.add('form-status--ok')
+          form.reset()
+        } else {
+          status.textContent = data.error || 'Noe gikk galt.'
+          status.classList.add('form-status--error')
+        }
+      } catch {
+        status.textContent = 'Noe gikk galt. Prøv igjen.'
+        status.classList.add('form-status--error')
+      } finally {
+        btn.disabled = false
+        btn.textContent = 'Send forespørsel'
+      }
+    })
+  </script>
+
+  <script>
+    function acceptCookies() {
+      localStorage.setItem('cookies-accepted', '1')
+      document.getElementById('cookieBanner').classList.remove('show')
+    }
+    if (!localStorage.getItem('cookies-accepted')) {
+      document.getElementById('cookieBanner').classList.add('show')
+    }
+  </script>
+
+  <!-- Footer -->
+  <footer>
+    <div>Studio Texnæs &mdash; Oslo</div>
+    <span>Et rom for bevegelse</span>
+    <button class="footer-personvern-link" onclick="document.getElementById('personvernModal').classList.add('open')">Personvern &amp; cookies</button>
+  </footer>
+
+  <!-- Cookie banner -->
+  <div class="cookie-banner" id="cookieBanner">
+    <p>Vi bruker informasjonskapsler for å vise innebygd kalenderinnhold (Google Calendar). Ved å fortsette godtar du dette. <button class="cookie-link" onclick="document.getElementById('personvernModal').classList.add('open')">Les mer</button></p>
+    <button class="cookie-accept" onclick="acceptCookies()">Forstått</button>
+  </div>
+
+  <!-- Personvern modal -->
+  <div class="modal-backdrop" id="personvernModal" onclick="if(event.target===this)this.classList.remove('open')">
+    <div class="modal">
+      <button class="modal-close" onclick="document.getElementById('personvernModal').classList.remove('open')">&times;</button>
+      <h2>Personvern &amp; cookies</h2>
+
+      <h3>Hvem er vi</h3>
+      <p>Studio Texnæs er et dansestudio i Oslo. Kontakt: <a href="mailto:hei@studio-texnaes.no">hei@studio-texnaes.no</a></p>
+
+      <h3>Hvilke data samler vi inn</h3>
+      <p>Når du sender oss en melding via kontaktskjemaet, samler vi inn navn, e-postadresse og meldingsteksten du skriver. Disse opplysningene brukes kun til å besvare henvendelsen din og lagres ikke utover det.</p>
+
+      <h3>Informasjonskapsler (cookies)</h3>
+      <p>Nettsiden bruker innebygd Google Calendar for å vise studioets tilgjengelighet. Google kan sette informasjonskapsler i forbindelse med dette. Vi bruker ikke egne sporings- eller analysecookies.</p>
+      <p>For mer informasjon om Googles behandling av data, se <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Googles personvernpolicy</a>.</p>
+
+      <h3>Dine rettigheter</h3>
+      <p>Du har rett til innsyn i, retting av og sletting av personopplysninger vi har om deg. Ta kontakt på <a href="mailto:hei@studio-texnaes.no">hei@studio-texnaes.no</a> for å utøve disse rettighetene.</p>
+    </div>
+  </div>
+
+</body>
+</html>
