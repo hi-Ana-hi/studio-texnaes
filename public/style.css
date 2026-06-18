@@ -328,6 +328,28 @@ p {
   color: var(--black);
 }
 
+.leie-item--cta {
+  display: flex;
+  align-items: flex-end;
+}
+
+.leie-cta-btn {
+  display: inline-block;
+  background: var(--black);
+  color: var(--white);
+  text-decoration: none;
+  padding: 0.75rem 2rem;
+  font-family: inherit;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: background 0.2s;
+}
+
+.leie-cta-btn:hover {
+  background: var(--accent-pink);
+}
+
 .kalender-inner p a {
   color: var(--black);
   border-bottom: 1px solid var(--accent);
