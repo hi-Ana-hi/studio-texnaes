@@ -134,6 +134,24 @@ nav a.nav-active {
   color: #b85c7a !important;
 }
 
+.hero-primary-btn {
+  margin-top: 1rem;
+  display: inline-block;
+  background: var(--black);
+  color: var(--white);
+  text-decoration: none;
+  padding: 0.75rem 2rem;
+  font-family: inherit;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: background 0.2s;
+}
+
+.hero-primary-btn:hover {
+  background: var(--accent-pink);
+}
+
 .hero-divider {
   width: 40px;
   height: 1px;
@@ -143,7 +161,7 @@ nav a.nav-active {
 
 /* ── Section shared ── */
 section {
-  padding: 6rem 4rem;
+  padding: 6.5rem 4rem;
   max-width: 900px;
   margin: 0 auto;
 }
@@ -157,7 +175,7 @@ section {
 }
 
 h2 {
-  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  font-size: clamp(1.85rem, 4vw, 2.8rem);
   font-weight: normal;
   letter-spacing: 0.02em;
   margin-bottom: 1.5rem;
@@ -165,7 +183,7 @@ h2 {
 
 p {
   color: #3d3a37;
-  max-width: 60ch;
+  max-width: 56ch;
 }
 
 
@@ -174,6 +192,7 @@ p {
   border-bottom: 1px solid var(--border);
   max-width: 100%;
   padding: 0;
+  background: linear-gradient(180deg, #fdf8f5 0%, #fbf3ef 100%);
 }
 
 .om-oss-inner {
@@ -292,12 +311,16 @@ p {
   border-bottom: 1px solid var(--border);
   max-width: 100%;
   padding: 0;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(214, 176, 55, 0.08) 0, rgba(214, 176, 55, 0) 42%),
+    radial-gradient(circle at 85% 80%, rgba(228, 141, 171, 0.09) 0, rgba(228, 141, 171, 0) 44%),
+    #fdf8f5;
 }
 
 .leie-inner {
   max-width: 900px;
   margin: 0 auto;
-  padding: 6rem 4rem;
+  padding: 7rem 4rem;
 }
 
 .leie-image {
@@ -305,6 +328,112 @@ p {
   height: auto;
   display: block;
   margin-top: 3rem;
+}
+
+.leie-proof {
+  margin-top: 2.5rem;
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  background: rgba(253, 248, 245, 0.72);
+}
+
+.leie-proof-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.leie-proof-stat {
+  padding: 1rem;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.leie-proof-value {
+  display: block;
+  font-size: 1.15rem;
+  letter-spacing: 0.08em;
+  color: var(--black);
+}
+
+.leie-proof-label {
+  display: block;
+  margin-top: 0.3rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.leie-proof-quotes {
+  margin-top: 1.25rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.leie-proof-quotes blockquote {
+  margin: 0;
+  padding: 1rem;
+  border-left: 2px solid var(--accent);
+  background: rgba(255, 255, 255, 0.6);
+  font-size: 0.95rem;
+  color: #3d3a37;
+  font-style: italic;
+}
+
+.leie-steps {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+
+.leie-steps h3 {
+  font-size: 0.92rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1rem;
+  font-weight: normal;
+}
+
+.leie-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.leie-step {
+  padding: 1rem;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.62);
+}
+
+.leie-step-number {
+  display: inline-flex;
+  width: 1.8rem;
+  height: 1.8rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--black);
+  color: var(--white);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.7rem;
+}
+
+.leie-step h4 {
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--black);
+  margin-bottom: 0.45rem;
+  font-weight: normal;
+}
+
+.leie-step p {
+  font-size: 0.93rem;
 }
 
 .leie-subsection {
@@ -400,12 +529,13 @@ p {
   border-bottom: 1px solid var(--border);
   max-width: 100%;
   padding: 0;
+  background: linear-gradient(180deg, #fcf4ef 0%, #fdf8f5 100%);
 }
 
 .kalender-inner {
   max-width: 900px;
   margin: 0 auto;
-  padding: 6rem 4rem;
+  padding: 7rem 4rem;
 }
 
 .calendar-wrapper {
@@ -451,7 +581,18 @@ p {
   position: relative;
   max-width: 900px;
   margin: 0 auto;
-  padding: 6rem 4rem;
+  padding: 7rem 4rem;
+}
+
+.kontakt-steps {
+  margin-top: 1rem;
+  margin-left: 1.15rem;
+  max-width: 60ch;
+}
+
+.kontakt-steps li {
+  margin-bottom: 0.45rem;
+  color: #3d3a37;
 }
 
 /* ── Contact form ── */
@@ -790,6 +931,15 @@ footer span {
   .leie-grid {
     grid-template-columns: 1fr;
     gap: 2rem;
+  }
+
+  .leie-proof-stats,
+  .leie-proof-quotes {
+    grid-template-columns: 1fr;
+  }
+
+  .leie-steps-grid {
+    grid-template-columns: 1fr;
   }
 
   footer {
