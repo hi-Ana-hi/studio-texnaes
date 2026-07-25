@@ -481,6 +481,16 @@ p {
   color: #2f2b28;
 }
 
+.leie-subsection h4 {
+  margin-top: 1.25rem;
+  margin-bottom: 0.45rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #6f5510;
+  font-weight: normal;
+}
+
 .leie-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
