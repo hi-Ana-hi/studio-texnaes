@@ -48,21 +48,34 @@ header {
 }
 
 nav a {
+  position: relative;
   text-decoration: none;
-  color: var(--muted);
-  font-size: 0.8rem;
+  color: #5c5752;
+  font-size: 0.87rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   margin-left: 2rem;
+  padding-bottom: 0.2rem;
   transition: color 0.2s;
 }
 
 nav a:hover {
-  color: var(--accent-pink);
+  color: var(--black);
 }
 
 nav a.nav-active {
-  color: var(--accent);
+  color: var(--black);
+}
+
+nav a:hover::after,
+nav a.nav-active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--accent);
 }
 
 /* ── Hero ── */
