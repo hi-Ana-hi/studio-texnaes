@@ -5,6 +5,10 @@
   --accent-pink: #E48DAB;
   --muted: #7a7570;
   --border: #ead9d4;
+  --section-pad-y: 6.5rem;
+  --section-pad-x: 4rem;
+  --section-pad-y-mobile: 3.75rem;
+  --section-pad-x-mobile: 1.5rem;
 }
 
 *, *::before, *::after {
@@ -134,7 +138,8 @@ nav a.nav-active {
   color: #b85c7a !important;
 }
 
-.hero-primary-btn {
+.hero-primary-btn,
+.leie-cta-btn {
   margin-top: 1rem;
   display: inline-block;
   background: var(--black);
@@ -145,11 +150,14 @@ nav a.nav-active {
   font-size: 0.8rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  transition: background 0.2s;
+  border: 1px solid transparent;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
 }
 
-.hero-primary-btn:hover {
-  background: var(--accent-pink);
+.hero-primary-btn:hover,
+.leie-cta-btn:hover {
+  background: var(--accent);
+  color: var(--black);
 }
 
 .hero-divider {
@@ -198,7 +206,7 @@ p {
 .om-oss-inner {
   max-width: 900px;
   margin: 0 auto;
-  padding: 7rem 4rem;
+  padding: var(--section-pad-y) var(--section-pad-x);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -208,6 +216,19 @@ p {
 .om-oss-inner h2 {
   font-size: clamp(2.4rem, 5vw, 4rem);
   margin-bottom: 2rem;
+  position: relative;
+  padding-bottom: 0.75rem;
+}
+
+.om-oss-inner h2::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 2.4rem;
+  height: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, rgba(214, 176, 55, 0.95) 0%, rgba(214, 176, 55, 0.35) 100%);
 }
 
 .om-oss-inner p {
@@ -228,12 +249,46 @@ p {
 }
 
 /* ── Instruktører ── */
+.instruktorer-intro {
+  margin-top: 2.2rem;
+  max-width: 56ch;
+}
+
+.instruktorer-intro h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  letter-spacing: 0.03em;
+  text-transform: none;
+  color: var(--black);
+  margin-bottom: 0.5rem;
+  font-weight: normal;
+  line-height: 1.15;
+}
+
+.instruktorer-intro p {
+  font-size: 0.95rem !important;
+  color: #6a6560 !important;
+  font-style: normal !important;
+}
+
 .instruktorer-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
+  gap: 1.9rem;
   margin-top: 4rem;
   width: 100%;
+}
+
+@media (min-width: 1100px) {
+  .instruktorer-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .instruktorer-grid > .instruktør-card {
+    flex: 0 1 calc((100% - 5.7rem) / 4);
+    max-width: calc((100% - 5.7rem) / 4);
+  }
 }
 
 .instruktør-card {
@@ -242,13 +297,17 @@ p {
   flex-direction: column;
   text-decoration: none;
   color: inherit;
-  border: 1px solid var(--border);
+  border: 1px solid rgba(214, 176, 55, 0.24);
+  background: linear-gradient(180deg, rgba(255, 253, 248, 0.94) 0%, rgba(252, 249, 241, 0.9) 100%);
+  box-shadow: 0 8px 18px rgba(17, 17, 17, 0.08);
   overflow: hidden;
-  transition: border-color 0.4s;
+  transition: border-color 0.4s, box-shadow 0.4s, background 0.4s;
 }
 
 .instruktør-card:hover {
   border-color: var(--accent);
+  box-shadow: 0 12px 26px rgba(17, 17, 17, 0.12);
+  background: linear-gradient(180deg, rgba(255, 254, 250, 0.4) 0%, rgba(255, 252, 246, 0.34) 100%);
 }
 
 .instruktør-bg {
@@ -256,8 +315,9 @@ p {
   inset: 0;
   background-size: cover;
   background-position: center center;
+  transform: scale(1);
   opacity: 0;
-  transition: opacity 0.4s ease;
+  transition: opacity 0.4s ease, transform 0.5s ease;
 }
 
 .instruktør-bg::after {
@@ -269,6 +329,7 @@ p {
 
 .instruktør-card:hover .instruktør-bg {
   opacity: 1;
+  transform: scale(1.03);
 }
 
 .instruktør-info {
@@ -320,7 +381,27 @@ p {
 .leie-inner {
   max-width: 900px;
   margin: 0 auto;
-  padding: 7rem 4rem;
+  padding: var(--section-pad-y) var(--section-pad-x);
+}
+
+.leie-inner h2,
+.kalender-inner h2,
+.kontakt-inner h2 {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.75rem;
+}
+
+.leie-inner h2::after,
+.kalender-inner h2::after,
+.kontakt-inner h2::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 2.4rem;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(214, 176, 55, 0.95) 0%, rgba(214, 176, 55, 0.35) 100%);
 }
 
 .leie-image {
@@ -517,23 +598,6 @@ p {
   align-items: flex-end;
 }
 
-.leie-cta-btn {
-  display: inline-block;
-  background: var(--black);
-  color: var(--white);
-  text-decoration: none;
-  padding: 0.75rem 2rem;
-  font-family: inherit;
-  font-size: 0.8rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  transition: background 0.2s;
-}
-
-.leie-cta-btn:hover {
-  background: var(--accent-pink);
-}
-
 .kalender-inner p a {
   color: var(--black);
   border-bottom: 1px solid var(--accent);
@@ -561,7 +625,7 @@ p {
 .kalender-inner {
   max-width: 900px;
   margin: 0 auto;
-  padding: 7rem 4rem;
+  padding: var(--section-pad-y) var(--section-pad-x);
 }
 
 .calendar-wrapper {
@@ -607,7 +671,7 @@ p {
   position: relative;
   max-width: 900px;
   margin: 0 auto;
-  padding: 7rem 4rem;
+  padding: var(--section-pad-y) var(--section-pad-x);
 }
 
 .kontakt-steps {
@@ -675,20 +739,22 @@ p {
 }
 
 .contact-form button {
-  background: var(--black);
-  color: var(--white);
-  border: none;
+  background: transparent;
+  color: #4f4a45;
+  border: 1px solid var(--border);
   padding: 0.75rem 2rem;
   font-family: inherit;
   font-size: 0.8rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
 }
 
 .contact-form button:hover {
-  background: var(--accent-pink);
+  background: rgba(214, 176, 55, 0.08);
+  border-color: rgba(214, 176, 55, 0.55);
+  color: #3f3a35;
 }
 
 .contact-form button:disabled {
@@ -943,13 +1009,26 @@ footer span {
 
   .instruktorer-grid {
     grid-template-columns: repeat(2, 1fr);
+    column-gap: 2.15rem;
+  }
+
+  .instruktør-info {
+    padding: 1.55rem 1.15rem;
+  }
+
+  .instruktør-navn {
+    line-height: 1.35;
+  }
+
+  .instruktør-fag {
+    letter-spacing: 0.14em;
   }
 
   .om-oss-inner,
   .leie-inner,
   .kalender-inner,
   .kontakt-inner {
-    padding: 4rem 1.5rem;
+    padding: var(--section-pad-y-mobile) var(--section-pad-x-mobile);
   }
 
 
