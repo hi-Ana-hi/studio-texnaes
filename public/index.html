@@ -59,6 +59,7 @@
     <nav>
       <a href="#om-oss">Om oss</a>
       <a href="#leie">Leie</a>
+      <a href="#galleri">Galleri</a>
       <a href="/tilgjengelighet">Tilgjengelighet</a>
       <a href="#kontakt">Kontakt</a>
     </nav>
@@ -208,6 +209,65 @@
         </div>
       </div>
 
+      <div class="studio-gallery" id="galleri" aria-label="Bilder fra studioet" data-gallery-carousel>
+        <div class="studio-gallery-header">
+          <div>
+            <p class="leie-subsection-kicker">Se studioet</p>
+            <h3>Et glimt av studioet</h3>
+          </div>
+          <div class="studio-gallery-actions">
+            <div class="studio-gallery-controls" aria-label="Navigasjon for bildegalleri">
+              <button type="button" class="studio-gallery-btn" data-gallery-prev aria-label="Forrige bilde">‹</button>
+              <button type="button" class="studio-gallery-btn" data-gallery-next aria-label="Neste bilde">›</button>
+            </div>
+            <button type="button" class="studio-gallery-open-btn" data-gallery-open>
+              Åpne i stor visning
+            </button>
+          </div>
+        </div>
+
+        <div class="studio-gallery-viewport">
+          <div class="studio-gallery-track">
+            <figure class="studio-gallery-slide">
+              <img src="/pictures_studio/IMG_0429.JPG" alt="Dansehallen med speilvegg og åpent gulv" data-caption="Speilvegg og hovedgulv" loading="lazy" />
+            </figure>
+            <figure class="studio-gallery-slide">
+              <img src="/pictures_studio/IMG_0403.JPG" alt="Bredt utsnitt av studioet med gulv og takhøyde" data-caption="Full romfølelse og takhøyde" loading="lazy" />
+            </figure>
+            <figure class="studio-gallery-slide">
+              <img src="/pictures_studio/IMG_0382.JPG" alt="Dansehallen med speil og treningsflate" data-caption="Treningsflate for klasser" loading="lazy" />
+            </figure>
+            <figure class="studio-gallery-slide">
+              <img src="/pictures_studio/IMG_0344.JPG" alt="Dansehallen med scenefølelse og lys" data-caption="Lysoppsett for visninger" loading="lazy" />
+            </figure>
+            <figure class="studio-gallery-slide">
+              <img src="/pictures_studio/IMG_0394.JPG" alt="Dansegulv med speil og dybde i rommet" data-caption="Dybde i salen" loading="lazy" />
+            </figure>
+            <figure class="studio-gallery-slide">
+              <img src="/pictures_studio/IMG_0397.JPG" alt="Dansehallen i bredt perspektiv" data-caption="Bred salvisning" loading="lazy" />
+            </figure>
+          </div>
+        </div>
+
+        <div class="studio-gallery-cta">
+          <a href="/tilgjengelighet" class="studio-gallery-cta-link">Se tilgjengelighet</a>
+          <a href="#kontakt" class="studio-gallery-cta-link">Send forespørsel</a>
+        </div>
+      </div>
+
+      <dialog class="studio-lightbox" data-studio-lightbox aria-label="Stor visning av studiobilder">
+        <button type="button" class="studio-lightbox-close" data-lightbox-close aria-label="Lukk bildevisning">×</button>
+        <button type="button" class="studio-lightbox-nav studio-lightbox-nav--prev" data-lightbox-prev aria-label="Forrige bilde">‹</button>
+        <figure class="studio-lightbox-figure">
+          <img src="" alt="" data-lightbox-image />
+          <p class="studio-lightbox-hint" data-lightbox-hint hidden>Sveip eller bruk piltaster</p>
+          <p class="studio-lightbox-counter" data-lightbox-counter></p>
+          <div class="studio-lightbox-dots" data-lightbox-dots></div>
+          <figcaption data-lightbox-caption></figcaption>
+        </figure>
+        <button type="button" class="studio-lightbox-nav studio-lightbox-nav--next" data-lightbox-next aria-label="Neste bilde">›</button>
+      </dialog>
+
       <div class="leie-steps" aria-label="Hvordan leie fungerer">
         <h3>Hvordan leie fungerer</h3>
         <div class="leie-steps-grid">
@@ -253,24 +313,6 @@
       </div>
 
       <img src="/Studio_Texnæs.png" alt="Studio Texnæs" class="leie-image" />
-    </div>
-  </div>
-
-  <!-- Kalender -->
-  <div class="kalender" id="kalender">
-    <div class="kalender-inner">
-      <p class="section-label">Tilgjengelighet</p>
-      <h2>Tilgjengelighet</h2>
-      <p>Ta kontakt på <a href="mailto:leie@studio-texnaes.no">leie@studio-texnaes.no</a> for å booke.</p>
-      <div class="calendar-wrapper">
-        <iframe
-          src="https://calendar.google.com/calendar/embed?src=c_772c9d8ac26f73423463b3c7ee6c5c4d9ccd35819da1884f4849e5246e5fc5b7%40group.calendar.google.com&ctz=Europe%2FOslo"
-          style="border: 0"
-          frameborder="0"
-          scrolling="no"
-          title="Studio Texnæs kalender"
-        ></iframe>
-      </div>
     </div>
   </div>
 
@@ -407,6 +449,263 @@
       }
 
       watchEnd(a, b)
+    })()
+  </script>
+
+  <script>
+    (function () {
+      const galleries = document.querySelectorAll('[data-gallery-carousel]')
+      const lightbox = document.querySelector('[data-studio-lightbox]')
+      const lightboxImage = lightbox?.querySelector('[data-lightbox-image]')
+      const lightboxCaption = lightbox?.querySelector('[data-lightbox-caption]')
+      const lightboxCounter = lightbox?.querySelector('[data-lightbox-counter]')
+      const lightboxHint = lightbox?.querySelector('[data-lightbox-hint]')
+      const lightboxDots = lightbox?.querySelector('[data-lightbox-dots]')
+      const lightboxClose = lightbox?.querySelector('[data-lightbox-close]')
+      const lightboxPrev = lightbox?.querySelector('[data-lightbox-prev]')
+      const lightboxNext = lightbox?.querySelector('[data-lightbox-next]')
+      const lightboxFigure = lightbox?.querySelector('.studio-lightbox-figure')
+      let activeImages = []
+      let activeIndex = 0
+      let touchStartX = 0
+      let touchStartY = 0
+      const SWIPE_THRESHOLD = 45
+      const SWIPE_RESTRAINT = 80
+      const HERO_IMAGE_PATH = '/pictures_studio/IMG_0403.JPG'
+      const LIGHTBOX_HINT_KEY = 'studio-lightbox-hint-seen'
+
+      const enterFullscreen = async (element) => {
+        if (!element) return
+        try {
+          if (element.requestFullscreen) {
+            await element.requestFullscreen()
+            return
+          }
+          if (element.webkitRequestFullscreen) {
+            element.webkitRequestFullscreen()
+          }
+        } catch {
+          // Some browsers block fullscreen transitions outside direct user gesture.
+        }
+      }
+
+      const exitFullscreen = async () => {
+        try {
+          if (document.fullscreenElement && document.exitFullscreen) {
+            await document.exitFullscreen()
+            return
+          }
+          if (document.webkitFullscreenElement && document.webkitExitFullscreen) {
+            document.webkitExitFullscreen()
+          }
+        } catch {
+          // Ignore exit failures; dialog close still works.
+        }
+      }
+
+      const updateDots = () => {
+        if (!lightboxDots) return
+        const dots = lightboxDots.querySelectorAll('.studio-lightbox-dot')
+        dots.forEach((dot, index) => {
+          dot.classList.toggle('is-active', index === activeIndex)
+        })
+      }
+
+      const buildDots = () => {
+        if (!lightboxDots) return
+        lightboxDots.innerHTML = ''
+        activeImages.forEach((_, index) => {
+          const dot = document.createElement('button')
+          dot.type = 'button'
+          dot.className = 'studio-lightbox-dot'
+          dot.setAttribute('aria-label', `Gå til bilde ${index + 1}`)
+          dot.addEventListener('click', () => {
+            activeIndex = index
+            setActiveImage()
+          })
+          lightboxDots.appendChild(dot)
+        })
+      }
+
+      const setActiveImage = (withFade = true) => {
+        if (!lightboxImage || !lightboxCaption || activeImages.length === 0) return
+
+        const applyImageData = () => {
+          const img = activeImages[activeIndex]
+          lightboxImage.src = img.src
+          lightboxImage.alt = img.alt || 'Studiobilde'
+          lightboxCaption.textContent = img.dataset.caption || img.alt || ''
+          if (lightboxCounter) {
+            lightboxCounter.textContent = `${activeIndex + 1}/${activeImages.length}`
+          }
+          updateDots()
+        }
+
+        if (!withFade) {
+          applyImageData()
+          return
+        }
+
+        lightboxImage.classList.add('studio-lightbox-image--fade')
+        window.setTimeout(() => {
+          applyImageData()
+          window.requestAnimationFrame(() => {
+            lightboxImage.classList.remove('studio-lightbox-image--fade')
+          })
+        }, 110)
+      }
+
+      const showHintOnce = () => {
+        if (!lightboxHint) return
+        let seenHint = false
+
+        try {
+          seenHint = localStorage.getItem(LIGHTBOX_HINT_KEY) === '1'
+        } catch {
+          seenHint = true
+        }
+
+        if (seenHint) {
+          lightboxHint.hidden = true
+          return
+        }
+
+        lightboxHint.hidden = false
+        window.setTimeout(() => {
+          if (lightboxHint) lightboxHint.hidden = true
+        }, 3200)
+
+        try {
+          localStorage.setItem(LIGHTBOX_HINT_KEY, '1')
+        } catch {
+          // Ignore storage restrictions in private browsing.
+        }
+      }
+
+      const openLightbox = async (images, index) => {
+        if (!lightbox) return
+        activeImages = images
+        activeIndex = index
+        buildDots()
+        setActiveImage(false)
+        if (!lightbox.open && lightbox.showModal) {
+          lightbox.showModal()
+        }
+        document.body.classList.add('no-scroll')
+        showHintOnce()
+        await enterFullscreen(lightbox)
+      }
+
+      const closeLightbox = async () => {
+        if (!lightbox) return
+        await exitFullscreen()
+        if (lightbox.open && lightbox.close) {
+          lightbox.close()
+        }
+        document.body.classList.remove('no-scroll')
+      }
+
+      const showNext = () => {
+        if (activeImages.length === 0) return
+        activeIndex = (activeIndex + 1) % activeImages.length
+        setActiveImage()
+      }
+
+      const showPrev = () => {
+        if (activeImages.length === 0) return
+        activeIndex = (activeIndex - 1 + activeImages.length) % activeImages.length
+        setActiveImage()
+      }
+
+      lightboxClose?.addEventListener('click', closeLightbox)
+      lightboxPrev?.addEventListener('click', showPrev)
+      lightboxNext?.addEventListener('click', showNext)
+
+      lightboxFigure?.addEventListener('touchstart', (event) => {
+        if (event.touches.length !== 1) return
+        touchStartX = event.touches[0].clientX
+        touchStartY = event.touches[0].clientY
+      }, { passive: true })
+
+      lightboxFigure?.addEventListener('touchend', (event) => {
+        if (!touchStartX || !touchStartY) return
+        const touch = event.changedTouches[0]
+        const deltaX = touch.clientX - touchStartX
+        const deltaY = touch.clientY - touchStartY
+
+        if (Math.abs(deltaX) > SWIPE_THRESHOLD && Math.abs(deltaY) < SWIPE_RESTRAINT) {
+          if (deltaX < 0) {
+            showNext()
+          } else {
+            showPrev()
+          }
+        }
+
+        touchStartX = 0
+        touchStartY = 0
+      }, { passive: true })
+
+      lightbox?.addEventListener('click', (event) => {
+        if (event.target === lightbox) closeLightbox()
+      })
+
+      lightbox?.addEventListener('close', () => {
+        document.body.classList.remove('no-scroll')
+      })
+
+      document.addEventListener('keydown', (event) => {
+        if (!lightbox || !lightbox.open) return
+        if (event.key === 'Escape') closeLightbox()
+        if (event.key === 'ArrowRight') showNext()
+        if (event.key === 'ArrowLeft') showPrev()
+      })
+
+      galleries.forEach((gallery) => {
+        const track = gallery.querySelector('.studio-gallery-track')
+        const prev = gallery.querySelector('[data-gallery-prev]')
+        const next = gallery.querySelector('[data-gallery-next]')
+        const open = gallery.querySelector('[data-gallery-open]')
+        const firstSlide = gallery.querySelector('.studio-gallery-slide')
+        const slideImages = Array.from(gallery.querySelectorAll('.studio-gallery-slide img'))
+
+        if (!track || !prev || !next || !firstSlide) return
+
+        const getStep = () => {
+          const slideWidth = firstSlide.getBoundingClientRect().width
+          const gap = parseFloat(getComputedStyle(track).gap || '0')
+          return slideWidth + gap
+        }
+
+        prev.addEventListener('click', () => {
+          track.scrollBy({ left: -getStep(), behavior: 'smooth' })
+        })
+
+        next.addEventListener('click', () => {
+          track.scrollBy({ left: getStep(), behavior: 'smooth' })
+        })
+
+        open?.addEventListener('click', () => {
+          const heroIndex = slideImages.findIndex((img) => img.getAttribute('src') === HERO_IMAGE_PATH)
+          openLightbox(slideImages, heroIndex >= 0 ? heroIndex : 0)
+        })
+
+        slideImages.forEach((img, index) => {
+          img.setAttribute('tabindex', '0')
+          img.setAttribute('role', 'button')
+          img.setAttribute('aria-label', `${img.alt}. Klikk for stor visning.`)
+
+          img.addEventListener('click', () => {
+            openLightbox(slideImages, index)
+          })
+
+          img.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+              event.preventDefault()
+              openLightbox(slideImages, index)
+            }
+          })
+        })
+      })
     })()
   </script>
 
