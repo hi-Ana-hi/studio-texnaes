@@ -31,13 +31,10 @@
       <h2>Ledige tider</h2>
       <p>Kalenderen viser når studioet er opptatt. Studioet leies ut til bevegelsespraksis, undervisning, kreativt arbeid og intime visninger. Ser du et ledig tidspunkt? Send oss en forespørsel nedenfor.</p>
       <div class="calendar-wrapper">
-        <iframe
-          src="https://calendar.google.com/calendar/embed?src=c_772c9d8ac26f73423463b3c7ee6c5c4d9ccd35819da1884f4849e5246e5fc5b7%40group.calendar.google.com&ctz=Europe%2FOslo"
-          style="border: 0"
-          frameborder="0"
-          scrolling="no"
-          title="Studio Texnæs kalender"
-        ></iframe>
+        <div class="calendar-consent-placeholder" id="calendarConsentPlaceholder">
+          <p>Kalenderen vises fra Google.</p>
+          <button class="cookie-accept" type="button" onclick="allowGoogleContent()">Vis kalender</button>
+        </div>
       </div>
     </div>
   </div>
@@ -139,11 +136,32 @@
   </script>
 
   <script>
-    function acceptCookies() {
-      localStorage.setItem('cookies-accepted', '1')
+    const calendarUrl = 'https://calendar.google.com/calendar/embed?src=c_772c9d8ac26f73423463b3c7ee6c5c4d9ccd35819da1884f4849e5246e5fc5b7%40group.calendar.google.com&ctz=Europe%2FOslo'
+
+    function loadCalendar() {
+      const iframe = document.createElement('iframe')
+      iframe.src = calendarUrl
+      iframe.title = 'Studio Texnæs kalender'
+      iframe.style.border = '0'
+      iframe.setAttribute('frameborder', '0')
+      iframe.setAttribute('scrolling', 'no')
+      document.getElementById('calendarConsentPlaceholder').replaceWith(iframe)
+    }
+
+    function allowGoogleContent() {
+      localStorage.setItem('google-content-consent', 'accepted')
+      loadCalendar()
       document.getElementById('cookieBanner').classList.remove('show')
     }
-    if (!localStorage.getItem('cookies-accepted')) {
+
+    function declineGoogleContent() {
+      localStorage.setItem('google-content-consent', 'declined')
+      document.getElementById('cookieBanner').classList.remove('show')
+    }
+
+    if (localStorage.getItem('google-content-consent') === 'accepted') {
+      loadCalendar()
+    } else if (!localStorage.getItem('google-content-consent')) {
       document.getElementById('cookieBanner').classList.add('show')
     }
   </script>
@@ -157,8 +175,11 @@
 
   <!-- Cookie banner -->
   <div class="cookie-banner" id="cookieBanner">
-    <p>Vi bruker informasjonskapsler for å vise innebygd kalenderinnhold (Google Calendar). Ved å fortsette godtar du dette. <button class="cookie-link" onclick="document.getElementById('personvernModal').classList.add('open')">Les mer</button></p>
-    <button class="cookie-accept" onclick="acceptCookies()">Forstått</button>
+    <p>Vi bruker cookies på nettsiden. Du kan godta eller avslå cookies. <button class="cookie-link" onclick="document.getElementById('personvernModal').classList.add('open')">Les mer</button></p>
+    <div class="cookie-actions">
+      <button class="cookie-decline" type="button" onclick="declineGoogleContent()">Avslå</button>
+      <button class="cookie-accept" type="button" onclick="allowGoogleContent()">Godta</button>
+    </div>
   </div>
 
   <!-- Personvern modal -->
@@ -174,8 +195,9 @@
       <p>Når du sender oss en melding via kontaktskjemaet, samler vi inn navn, e-postadresse og meldingsteksten du skriver. Disse opplysningene brukes kun til å besvare henvendelsen din og lagres ikke utover det.</p>
 
       <h3>Informasjonskapsler (cookies)</h3>
-      <p>Nettsiden bruker innebygd Google Calendar for å vise studioets tilgjengelighet. Google kan sette informasjonskapsler i forbindelse med dette. Vi bruker ikke egne sporings- eller analysecookies.</p>
+      <p>Nettsiden bruker innebygd Google Maps for å vise hvor studioet ligger og Google Calendar for å vise tilgjengelighet. Google kan sette informasjonskapsler når dette innholdet lastes. Vi bruker ikke egne sporings- eller analysecookies.</p>
       <p>For mer informasjon om Googles behandling av data, se <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Googles personvernpolicy</a>.</p>
+      <p><button class="cookie-link" type="button" onclick="localStorage.removeItem('google-content-consent'); location.reload()">Endre cookievalg</button></p>
 
       <h3>Dine rettigheter</h3>
       <p>Du har rett til innsyn i, retting av og sletting av personopplysninger vi har om deg. Ta kontakt på <a href="mailto:hei@studio-texnaes.no">hei@studio-texnaes.no</a> for å utøve disse rettighetene.</p>

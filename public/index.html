@@ -352,12 +352,10 @@
           <span>Du finner Studio Texnæs på gateplan, rett over gaten for Flerbrukshallen (vis-à-vis tigeren).</span>
         </div>
         <div class="kart-wrapper">
-          <iframe
-            src="https://maps.google.com/maps?q=Vulkan%2030%2C%200175%20Oslo&z=16&output=embed"
-            title="Studio Texnæs kart"
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-          ></iframe>
+          <div class="map-consent-placeholder" id="mapConsentPlaceholder">
+            <p>Kartet vises fra Google.</p>
+            <button class="cookie-accept" type="button" onclick="allowGoogleContent()">Vis kart</button>
+          </div>
         </div>
 
         <div class="kontakt-row">
@@ -726,8 +724,11 @@
 
   <!-- Cookie banner -->
   <div class="cookie-banner" id="cookieBanner">
-    <p>Vi bruker informasjonskapsler for å vise innebygd kalenderinnhold (Google Calendar). Ved å fortsette godtar du dette. <button class="cookie-link" onclick="document.getElementById('personvernModal').classList.add('open')">Les mer</button></p>
-    <button class="cookie-accept" onclick="acceptCookies()">Forstått</button>
+    <p>Vi bruker cookies på nettsiden. Du kan godta eller avslå cookies. <button class="cookie-link" onclick="document.getElementById('personvernModal').classList.add('open')">Les mer</button></p>
+    <div class="cookie-actions">
+      <button class="cookie-decline" type="button" onclick="declineGoogleContent()">Avslå</button>
+      <button class="cookie-accept" type="button" onclick="allowGoogleContent()">Godta</button>
+    </div>
   </div>
 
   <!-- Personvern modal -->
@@ -743,8 +744,9 @@
       <p>Når du sender oss en melding via kontaktskjemaet, samler vi inn navn, e-postadresse og meldingsteksten du skriver. Disse opplysningene brukes kun til å besvare henvendelsen din og lagres ikke utover det.</p>
 
       <h3>Informasjonskapsler (cookies)</h3>
-      <p>Nettsiden bruker innebygd Google Calendar for å vise studioets tilgjengelighet. Google kan sette informasjonskapsler i forbindelse med dette. Vi bruker ikke egne sporings- eller analysecookies.</p>
+      <p>Nettsiden bruker innebygd Google Maps for å vise hvor studioet ligger og Google Calendar for å vise tilgjengelighet. Google kan sette informasjonskapsler når dette innholdet lastes. Vi bruker ikke egne sporings- eller analysecookies.</p>
       <p>For mer informasjon om Googles behandling av data, se <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Googles personvernpolicy</a>.</p>
+      <p><button class="cookie-link" type="button" onclick="localStorage.removeItem('google-content-consent'); location.reload()">Endre cookievalg</button></p>
 
       <h3>Dine rettigheter</h3>
       <p>Du har rett til innsyn i, retting av og sletting av personopplysninger vi har om deg. Ta kontakt på <a href="mailto:hei@studio-texnaes.no">hei@studio-texnaes.no</a> for å utøve disse rettighetene.</p>
@@ -755,11 +757,31 @@
   </div>
 
   <script>
-    function acceptCookies() {
-      localStorage.setItem('cookies-accepted', '1')
+    const mapUrl = 'https://maps.google.com/maps?q=Vulkan%2030%2C%200175%20Oslo&z=16&output=embed'
+
+    function loadMap() {
+      const iframe = document.createElement('iframe')
+      iframe.src = mapUrl
+      iframe.title = 'Studio Texnæs kart'
+      iframe.loading = 'lazy'
+      iframe.referrerPolicy = 'no-referrer-when-downgrade'
+      document.getElementById('mapConsentPlaceholder').replaceWith(iframe)
+    }
+
+    function allowGoogleContent() {
+      localStorage.setItem('google-content-consent', 'accepted')
+      loadMap()
       document.getElementById('cookieBanner').classList.remove('show')
     }
-    if (!localStorage.getItem('cookies-accepted')) {
+
+    function declineGoogleContent() {
+      localStorage.setItem('google-content-consent', 'declined')
+      document.getElementById('cookieBanner').classList.remove('show')
+    }
+
+    if (localStorage.getItem('google-content-consent') === 'accepted') {
+      loadMap()
+    } else if (!localStorage.getItem('google-content-consent')) {
       document.getElementById('cookieBanner').classList.add('show')
     }
   </script>
