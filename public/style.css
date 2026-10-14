@@ -295,19 +295,6 @@ p {
   width: 100%;
 }
 
-@media (min-width: 1100px) {
-  .instruktorer-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .instruktorer-grid > .instruktør-card {
-    flex: 0 1 calc((100% - 5.7rem) / 4);
-    max-width: calc((100% - 5.7rem) / 4);
-  }
-}
-
 .instruktør-card {
   position: relative;
   display: flex;
