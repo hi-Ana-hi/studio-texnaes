@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Iryna Derkach – Heels – Studio Texnæs</title>
+  <meta name="description" content="Iryna Derkach underviser heels på Studio Texnæs i Oslo." />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="canonical" href="https://studio-texnaes.no/iryna" />
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <a href="/" class="logo">Studio Texnæs</a>
+    <nav>
+      <a href="/#om-oss">Om oss</a>
+      <a href="/workshops">Workshops</a>
+      <a href="/#leie">Leie</a>
+      <a href="/#galleri">Galleri</a>
+      <a href="/tilgjengelighet">Tilgjengelighet</a>
+      <a href="/#kontakt">Kontakt</a>
+    </nav>
+  </header>
+
+  <!-- Lærer -->
+  <div class="workshops">
+    <div class="workshops-inner">
+      <p class="section-label">Heels</p>
+      <h2>Iryna Derkach</h2>
+
+      <article class="workshop-card">
+        <div class="workshop-image">
+          <img src="/iryna.jpg" alt="Iryna Derkach i heels, sittende på en stol" />
+        </div>
+        <div class="workshop-content">
+          <p class="workshop-date">Lærer · Heels</p>
+          <h3>Fra mykt og elegant til rått og kraftfullt</h3>
+          <p>Iryna begynte dansereisen sin med hiphop, men for seks år siden oppdaget hun heels, og da var det ingen vei tilbake. Siden har hun utforsket choreo, twerk, salsa og mye mer. Det hun elsker aller mest med heels, er kontrastene: det myke og elegante som møter det rå og kraftfulle. Hun henter stadig inspirasjon fra dyktige dansere og fortsetter å vokse som danser.</p>
+
+          <div class="workshop-buttons">
+            <a href="/workshops" class="hero-primary-btn">Se Irynas workshop</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div>Studio Texnæs &mdash; Oslo</div>
+    <span>Et rom for bevegelse</span>
+    <button class="footer-personvern-link" onclick="document.getElementById('personvernModal').classList.add('open')">Personvern &amp; cookies</button>
+  </footer>
+
+  <!-- Cookie banner -->
+  <div class="cookie-banner" id="cookieBanner">
+    <p>Vi bruker cookies på nettsiden. Du kan godta eller avslå cookies. <button class="cookie-link" onclick="document.getElementById('personvernModal').classList.add('open')">Les mer</button></p>
+    <div class="cookie-actions">
+      <button class="cookie-decline" type="button" onclick="declineGoogleContent()">Avslå</button>
+      <button class="cookie-accept" type="button" onclick="allowGoogleContent()">Godta</button>
+    </div>
+  </div>
+
+  <!-- Personvern modal -->
+  <div class="modal-backdrop" id="personvernModal" onclick="if(event.target===this)this.classList.remove('open')">
+    <div class="modal">
+      <button class="modal-close" onclick="document.getElementById('personvernModal').classList.remove('open')">&times;</button>
+      <h2>Personvern &amp; cookies</h2>
+
+      <h3>Hvem er vi</h3>
+      <p>Studio Texnæs er et dansestudio i Oslo. Kontakt: <a href="mailto:hei@studio-texnaes.no">hei@studio-texnaes.no</a></p>
+
+      <h3>Hvilke data samler vi inn</h3>
+      <p>Når du sender oss en melding via kontaktskjemaet, samler vi inn navn, e-postadresse og meldingsteksten du skriver. Disse opplysningene brukes kun til å besvare henvendelsen din og lagres ikke utover det.</p>
+
+      <h3>Informasjonskapsler (cookies)</h3>
+      <p>Nettsiden bruker innebygd Google Maps for å vise hvor studioet ligger og Google Calendar for å vise tilgjengelighet. Google kan sette informasjonskapsler når dette innholdet lastes. Vi bruker ikke egne sporings- eller analysecookies.</p>
+      <p>For mer informasjon om Googles behandling av data, se <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Googles personvernpolicy</a>.</p>
+      <p><button class="cookie-link" type="button" onclick="localStorage.removeItem('google-content-consent'); location.reload()">Endre cookievalg</button></p>
+
+      <h3>Dine rettigheter</h3>
+      <p>Du har rett til innsyn i, retting av og sletting av personopplysninger vi har om deg. Ta kontakt på <a href="mailto:hei@studio-texnaes.no">hei@studio-texnaes.no</a> for å utøve disse rettighetene.</p>
+    </div>
+  </div>
+
+  <script>
+    function allowGoogleContent() {
+      localStorage.setItem('google-content-consent', 'accepted')
+      document.getElementById('cookieBanner').classList.remove('show')
+    }
+
+    function declineGoogleContent() {
+      localStorage.setItem('google-content-consent', 'declined')
+      document.getElementById('cookieBanner').classList.remove('show')
+    }
+
+    if (!localStorage.getItem('google-content-consent')) {
+      document.getElementById('cookieBanner').classList.add('show')
+    }
+  </script>
+
+</body>
+</html>

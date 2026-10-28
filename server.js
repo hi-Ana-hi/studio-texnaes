@@ -92,6 +92,14 @@ app.get('/tilgjengelighet', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'tilgjengelighet.html'))
 })
 
+app.get('/workshops', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'workshops.html'))
+})
+
+app.get('/iryna', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'iryna.html'))
+})
+
 app.post('/contact-leie', contactLimiter, async (req, res) => {
   const { name, email, message } = req.body
 

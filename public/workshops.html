@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Workshops – Studio Texnæs</title>
+  <meta name="description" content="Workshops på Studio Texnæs, Vulkan i Oslo. Heels Workshop for nybegynnere lørdag 21. november." />
+  <link rel="canonical" href="https://studio-texnaes.no/workshops" />
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <a href="/" class="logo">Studio Texnæs</a>
+    <nav>
+      <a href="/#om-oss">Om oss</a>
+      <a href="/workshops" class="nav-active">Workshops</a>
+      <a href="/#leie">Leie</a>
+      <a href="/#galleri">Galleri</a>
+      <a href="/tilgjengelighet">Tilgjengelighet</a>
+      <a href="/#kontakt">Kontakt</a>
+    </nav>
+  </header>
+
+  <!-- Workshops -->
+  <div class="workshops" id="workshops">
+    <div class="workshops-inner">
+      <p class="section-label">Workshops</p>
+      <h2>Kommende workshops</h2>
+
+      <article class="workshop-card workshop-card--fill">
+        <div class="workshop-image">
+          <img src="/iryna.jpg" alt="Iryna Derkach i heels, sittende på en stol" loading="lazy" />
+        </div>
+        <div class="workshop-content">
+          <p class="workshop-date">Lørdag 21. november · kl. 15:00</p>
+          <h3>Heels Workshop for nybegynnere</h3>
+          <p>Nysgjerrig på heels, men ikke klar for å binde deg? Dette er workshopen for deg!</p>
+          <p>Kom og dans med oss i et varmt og inkluderende miljø. Ingen erfaring nødvendig.</p>
+          <p>Har du hæler, ta dem med. Har du ikke, kom som du er!</p>
+
+          <dl class="workshop-facts">
+            <div><dt>Dato</dt><dd>Lørdag 21. november, kl. 15:00</dd></div>
+            <div><dt>Varighet</dt><dd>2 timer</dd></div>
+            <div><dt>Pris</dt><dd>450 kr</dd></div>
+            <div><dt>Nivå</dt><dd>Nybegynnere (ingen erfaring nødvendig)</dd></div>
+            <div><dt>Sted</dt><dd>Studio Texnæs, Vulkan 30, Oslo</dd></div>
+            <div><dt>Lærer</dt><dd>Iryna Derkach</dd></div>
+          </dl>
+
+          <p class="workshop-offer"><strong>Bring a friend!</strong> Ta med en venn og få 50 kr avslag begge to (400 kr per person).</p>
+
+          <div class="workshop-buttons">
+            <a href="#pamelding" class="hero-primary-btn">Påmelding via kontaktskjema</a>
+          </div>
+        </div>
+
+        <div class="workshop-teacher">
+          <h4>Om læreren</h4>
+          <p>Iryna begynte dansereisen sin med hiphop, men for seks år siden oppdaget hun heels, og da var det ingen vei tilbake. Siden har hun utforsket choreo, twerk, salsa og mye mer. Det hun elsker aller mest med heels, er kontrastene: det myke og elegante som møter det rå og kraftfulle. Hun henter stadig inspirasjon fra dyktige dansere og fortsetter å vokse som danser.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <!-- Påmelding -->
+  <div class="kontakt" id="pamelding">
+    <div class="kontakt-inner">
+      <p class="section-label">Påmelding</p>
+      <h2>Meld deg på</h2>
+      <p>Fyll ut skjemaet, så bekrefter vi plassen din på e-post. Kommer du med en venn? Skriv navnet i meldingen, så får dere Bring a friend-tilbudet.</p>
+
+      <form class="contact-form" id="contactForm">
+        <div class="form-row">
+          <label for="name">Navn</label>
+          <input type="text" id="name" name="name" required placeholder="Ditt navn" />
+        </div>
+        <div class="form-row">
+          <label for="email">E-post</label>
+          <input type="email" id="email" name="email" required placeholder="din@epost.no" />
+        </div>
+        <div class="form-row">
+          <label for="message">Melding</label>
+          <textarea id="message" name="message" rows="5" required>Hei! Jeg vil gjerne melde meg på Heels Workshop for nybegynnere lørdag 21. november kl. 15:00.</textarea>
+        </div>
+        <div class="form-footer">
+          <p class="form-status" id="formStatus" aria-live="polite"></p>
+          <button type="submit">Send påmelding</button>
+        </div>
+      </form>
+
+      <div class="kontakt-links">
+        <div class="kontakt-row">
+          <span class="kontakt-type">E-post</span>
+          <a href="mailto:hei@studio-texnaes.no">hei@studio-texnaes.no</a>
+        </div>
+        <div class="kontakt-row">
+          <span class="kontakt-type">Adresse</span>
+          <span>Vulkan 30, 0175 Oslo</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', async (e) => {
+      e.preventDefault()
+      const form = e.target
+      const status = document.getElementById('formStatus')
+      const btn = form.querySelector('button')
+
+      btn.disabled = true
+      btn.textContent = 'Sender...'
+      status.textContent = ''
+      status.className = 'form-status'
+
+      const body = {
+        name: form.name.value,
+        email: form.email.value,
+        message: form.message.value,
+      }
+
+      try {
+        const res = await fetch('/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body),
+        })
+        const data = await res.json()
+
+        if (res.ok) {
+          status.textContent = 'Påmeldingen er sendt. Vi bekrefter på e-post så snart vi kan.'
+          status.classList.add('form-status--ok')
+          form.reset()
+        } else {
+          status.textContent = data.error || 'Noe gikk galt.'
+          status.classList.add('form-status--error')
+        }
+      } catch {
+        status.textContent = 'Noe gikk galt. Prøv igjen.'
+        status.classList.add('form-status--error')
+      } finally {
+        btn.disabled = false
+        btn.textContent = 'Send påmelding'
+      }
+    })
+  </script>
+
+  <!-- Footer -->
+  <footer>
+    <div>Studio Texnæs &mdash; Oslo</div>
+    <span>Et rom for bevegelse</span>
+    <button class="footer-personvern-link" onclick="document.getElementById('personvernModal').classList.add('open')">Personvern &amp; cookies</button>
+  </footer>
+
+  <!-- Cookie banner -->
+  <div class="cookie-banner" id="cookieBanner">
+    <p>Vi bruker cookies på nettsiden. Du kan godta eller avslå cookies. <button class="cookie-link" onclick="document.getElementById('personvernModal').classList.add('open')">Les mer</button></p>
+    <div class="cookie-actions">
+      <button class="cookie-decline" type="button" onclick="declineGoogleContent()">Avslå</button>
+      <button class="cookie-accept" type="button" onclick="allowGoogleContent()">Godta</button>
+    </div>
+  </div>
+
+  <!-- Personvern modal -->
+  <div class="modal-backdrop" id="personvernModal" onclick="if(event.target===this)this.classList.remove('open')">
+    <div class="modal">
+      <button class="modal-close" onclick="document.getElementById('personvernModal').classList.remove('open')">&times;</button>
+      <h2>Personvern &amp; cookies</h2>
+
+      <h3>Hvem er vi</h3>
+      <p>Studio Texnæs er et dansestudio i Oslo. Kontakt: <a href="mailto:hei@studio-texnaes.no">hei@studio-texnaes.no</a></p>
+
+      <h3>Hvilke data samler vi inn</h3>
+      <p>Når du sender oss en melding via kontaktskjemaet, samler vi inn navn, e-postadresse og meldingsteksten du skriver. Disse opplysningene brukes kun til å besvare henvendelsen din og lagres ikke utover det.</p>
+
+      <h3>Informasjonskapsler (cookies)</h3>
+      <p>Nettsiden bruker innebygd Google Maps for å vise hvor studioet ligger og Google Calendar for å vise tilgjengelighet. Google kan sette informasjonskapsler når dette innholdet lastes. Vi bruker ikke egne sporings- eller analysecookies.</p>
+      <p>For mer informasjon om Googles behandling av data, se <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Googles personvernpolicy</a>.</p>
+      <p><button class="cookie-link" type="button" onclick="localStorage.removeItem('google-content-consent'); location.reload()">Endre cookievalg</button></p>
+
+      <h3>Dine rettigheter</h3>
+      <p>Du har rett til innsyn i, retting av og sletting av personopplysninger vi har om deg. Ta kontakt på <a href="mailto:hei@studio-texnaes.no">hei@studio-texnaes.no</a> for å utøve disse rettighetene.</p>
+    </div>
+  </div>
+
+  <script>
+    function allowGoogleContent() {
+      localStorage.setItem('google-content-consent', 'accepted')
+      document.getElementById('cookieBanner').classList.remove('show')
+    }
+
+    function declineGoogleContent() {
+      localStorage.setItem('google-content-consent', 'declined')
+      document.getElementById('cookieBanner').classList.remove('show')
+    }
+
+    if (!localStorage.getItem('google-content-consent')) {
+      document.getElementById('cookieBanner').classList.add('show')
+    }
+  </script>
+
+</body>
+</html>
