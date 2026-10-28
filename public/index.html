@@ -166,7 +166,9 @@
 
       <a class="workshop-teaser" href="/workshops">
         <div class="workshop-teaser-image">
-          <img src="/iryna.jpg" alt="Iryna Derkach i heels, sittende på en stol" loading="lazy" />
+          <video muted loop playsinline preload="none" poster="/heels-promo.jpg" aria-label="Promovideo: Heels med Iryna Derkach" data-lazy-video>
+            <source src="/heels-promo.mp4" type="video/mp4" />
+          </video>
         </div>
         <div class="workshop-teaser-content">
           <p class="workshop-date">Lørdag 21. november · kl. 15:00</p>
@@ -404,6 +406,20 @@
   </div>
 
   <script>
+    // Teaser-video: lastes og spilles først når den er synlig, pauses når den er ute av syne
+    (function () {
+      const videos = document.querySelectorAll('video[data-lazy-video]')
+      if (!videos.length || !('IntersectionObserver' in window)) return
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) entry.target.play().catch(() => {})
+          else entry.target.pause()
+        })
+      }, { threshold: 0.25 })
+      videos.forEach((video) => observer.observe(video))
+    })()
+
     document.getElementById('contactForm').addEventListener('submit', async (e) => {
       e.preventDefault()
       const form = e.target

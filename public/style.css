@@ -354,6 +354,37 @@ p {
   object-position: 88% 70%;
 }
 
+.workshop-card--fill .workshop-video video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  background: #111;
+}
+
+.video-sound {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  padding: 0.45rem 0.9rem;
+  font-family: inherit;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--white);
+  background: rgba(17, 17, 17, 0.55);
+  border: 1px solid rgba(253, 248, 245, 0.6);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.video-sound:hover {
+  background: var(--accent);
+  color: var(--black);
+}
+
 .workshop-card--fill .workshop-facts {
   margin: 1.25rem 0;
 }
@@ -399,13 +430,13 @@ p {
   color: var(--black);
 }
 
-.workshop-teaser-image img {
+.workshop-teaser-image video {
   width: 100%;
   height: 100%;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 9 / 16;
   object-fit: cover;
-  object-position: center 75%;
   display: block;
+  background: #111;
 }
 
 .workshop-teaser-content {
@@ -1327,7 +1358,7 @@ p {
 }
 
 .form-status--ok {
-  color: #5a7a5a;
+  color: #b85c7a;
 }
 
 .form-status--error {
@@ -1636,6 +1667,12 @@ footer span {
 
   .workshop-card--fill .workshop-image img {
     position: static;
+  }
+
+  .workshop-card--fill .workshop-video video {
+    position: static;
+    aspect-ratio: 9 / 16;
+    max-height: 80vh;
   }
 
   .workshop-card > .workshop-teacher {

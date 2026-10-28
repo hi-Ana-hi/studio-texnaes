@@ -33,8 +33,11 @@
       <h2>Kommende workshops</h2>
 
       <article class="workshop-card workshop-card--fill">
-        <div class="workshop-image">
-          <img src="/iryna.jpg" alt="Iryna Derkach i heels, sittende på en stol" loading="lazy" />
+        <div class="workshop-image workshop-video">
+          <video autoplay muted loop playsinline preload="metadata" poster="/heels-promo.jpg" aria-label="Promovideo: Heels med Iryna Derkach">
+            <source src="/heels-promo.mp4" type="video/mp4" />
+          </video>
+          <button class="video-sound" type="button" aria-pressed="false">Lyd på</button>
         </div>
         <div class="workshop-content">
           <p class="workshop-date">Lørdag 21. november · kl. 15:00</p>
@@ -107,6 +110,18 @@
   </div>
 
   <script>
+    // Promovideo: lyd av/på
+    document.querySelectorAll('.workshop-video').forEach((wrap) => {
+      const video = wrap.querySelector('video')
+      const btn = wrap.querySelector('.video-sound')
+      btn.addEventListener('click', () => {
+        video.muted = !video.muted
+        if (!video.muted) video.play()
+        btn.textContent = video.muted ? 'Lyd på' : 'Lyd av'
+        btn.setAttribute('aria-pressed', String(!video.muted))
+      })
+    })
+
     document.getElementById('contactForm').addEventListener('submit', async (e) => {
       e.preventDefault()
       const form = e.target
