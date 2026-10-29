@@ -329,6 +329,61 @@ p {
   margin-top: 0.5rem;
 }
 
+.workshop-terms {
+  margin-top: 1.25rem;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.workshop-terms summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.7rem 0;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  cursor: pointer;
+  list-style: none;
+}
+
+.workshop-terms summary::-webkit-details-marker {
+  display: none;
+}
+
+.workshop-terms summary::after {
+  content: '+';
+  font-size: 1.1rem;
+  color: var(--accent);
+  transition: transform 0.2s;
+}
+
+.workshop-terms[open] summary::after {
+  transform: rotate(45deg);
+}
+
+.workshop-terms summary:hover {
+  color: var(--black);
+}
+
+.workshop-terms ul {
+  list-style: none;
+  padding-bottom: 0.9rem;
+}
+
+.workshop-terms li {
+  display: grid;
+  grid-template-columns: 12rem 1fr;
+  gap: 1rem;
+  padding: 0.3rem 0;
+  font-size: 0.95rem;
+}
+
+.workshop-terms li span {
+  color: var(--muted);
+}
+
 .workshop-teacher {
   margin-top: 2.25rem;
   padding-top: 1.75rem;
@@ -542,89 +597,117 @@ p {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 1.9rem;
+  gap: 2.5rem 1.75rem;
   margin-top: 4rem;
-  width: 100%;
+  /* bredere enn teksten over, så bildene får plass */
+  width: min(1200px, calc(100vw - 4rem));
 }
 
-/* 3 kort per rad; en siste rad med færre kort blir sentrert */
+/* 4 kort per rad; en siste rad med færre kort blir sentrert */
 .instruktorer-grid > .instruktør-card {
-  flex: 0 1 calc((100% - 2 * 1.9rem) / 3);
+  flex: 0 1 calc((100% - 3 * 1.75rem) / 4);
 }
 
 .instruktør-card {
-  position: relative;
   display: flex;
   flex-direction: column;
+  align-items: center;
   text-decoration: none;
   color: inherit;
-  border: 1px solid rgba(214, 176, 55, 0.24);
-  background: linear-gradient(180deg, rgba(255, 253, 248, 0.94) 0%, rgba(252, 249, 241, 0.9) 100%);
-  box-shadow: 0 8px 18px rgba(17, 17, 17, 0.08);
+}
+
+/* Buet topp (som en døråpning) */
+.instruktør-photo {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
   overflow: hidden;
-  transition: border-color 0.4s, box-shadow 0.4s, background 0.4s;
+  border-radius: 50% 50% 0 0 / 37.5% 37.5% 0 0;
+  background: var(--border);
+  box-shadow: 0 10px 24px rgba(17, 17, 17, 0.1);
 }
 
-.instruktør-card:hover {
-  border-color: var(--accent);
-  box-shadow: 0 12px 26px rgba(17, 17, 17, 0.12);
-  background: linear-gradient(180deg, rgba(255, 254, 250, 0.4) 0%, rgba(255, 252, 246, 0.34) 100%);
+.instruktør-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
 }
 
-.instruktør-bg {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center center;
-  transform: scale(1);
-  opacity: 0;
-  transition: opacity 0.4s ease, transform 0.5s ease;
-}
-
-.instruktør-bg::after {
+.instruktør-photo::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(17, 17, 17, 0.55);
-}
-
-.instruktør-card:hover .instruktør-bg {
-  opacity: 1;
-  transform: scale(1.03);
-}
-
-.instruktør-info {
-  position: relative;
-  z-index: 1;
-  padding: 2rem 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-  transition: color 0.4s;
+  background: linear-gradient(180deg, rgba(17, 17, 17, 0) 35%, rgba(17, 17, 17, 0.7) 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
 }
 
 .instruktør-navn {
-  font-size: 0.95rem;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 1.4rem;
+  z-index: 1;
+  padding: 0 1rem;
+  font-size: 1.05rem;
   letter-spacing: 0.03em;
-  color: var(--black);
-  transition: color 0.4s;
+  color: var(--white);
+  opacity: 0;
+  transform: translateY(0.5rem);
+  transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
 .instruktør-fag {
-  font-size: 0.68rem;
-  letter-spacing: 0.18em;
+  margin-top: 1.1rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--muted);
-  font-style: italic;
-  transition: color 0.4s;
+  color: var(--black);
+  transition: color 0.3s;
 }
 
-.instruktør-card:hover .instruktør-navn {
-  color: var(--white);
+/* Navnet under bildet vises bare på enheter uten hover (mobil) */
+.instruktør-sub {
+  display: none;
+  margin-top: 0.2rem;
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--muted);
+}
+
+.instruktør-card:hover .instruktør-photo img,
+.instruktør-card:focus-visible .instruktør-photo img {
+  transform: scale(1.04);
+}
+
+.instruktør-card:hover .instruktør-photo::after,
+.instruktør-card:focus-visible .instruktør-photo::after,
+.instruktør-card:hover .instruktør-navn,
+.instruktør-card:focus-visible .instruktør-navn {
+  opacity: 1;
+  transform: none;
 }
 
 .instruktør-card:hover .instruktør-fag {
-  color: var(--accent);
+  color: #b85c7a;
+}
+
+@media (hover: none) {
+  .instruktør-navn {
+    display: none;
+  }
+
+  .instruktør-sub {
+    display: block;
+  }
+}
+
+@media (min-width: 701px) and (max-width: 1000px) {
+  .instruktorer-grid > .instruktør-card {
+    flex-basis: calc((100% - 2 * 1.75rem) / 3);
+  }
 }
 
 /* ── Leie-seksjon ── */
@@ -1638,6 +1721,13 @@ footer span {
     padding: 5rem 1.5rem 5rem;
   }
 
+  .hero p.hero-label {
+    font-size: 1.15rem;
+    letter-spacing: 0.14em;
+    line-height: 1.5;
+    margin-top: 0.5rem;
+  }
+
   section {
     padding: 4rem 1.5rem;
   }
@@ -1684,24 +1774,24 @@ footer span {
     gap: 0;
   }
 
+  .workshop-terms li {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
   .instruktorer-grid {
-    column-gap: 2.15rem;
+    width: 100%;
+    gap: 2rem 1.25rem;
   }
 
   .instruktorer-grid > .instruktør-card {
-    flex-basis: calc((100% - 2.15rem) / 2);
-  }
-
-  .instruktør-info {
-    padding: 1.55rem 1.15rem;
-  }
-
-  .instruktør-navn {
-    line-height: 1.35;
+    flex-basis: calc((100% - 1.25rem) / 2);
   }
 
   .instruktør-fag {
-    letter-spacing: 0.14em;
+    margin-top: 0.8rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.16em;
   }
 
   .om-oss-inner,

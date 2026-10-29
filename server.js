@@ -68,7 +68,7 @@ app.post('/contact', contactLimiter, async (req, res) => {
 
   try {
     await transporter.sendMail({
-      from: `"Studio Texnæs" <${process.env.SMTP_USER}>`,
+      from: `"Studio T" <${process.env.SMTP_USER}>`,
       to: 'hei@studio-texnaes.no',
       replyTo: email,
       subject: `Ny henvendelse fra ${name}`,
@@ -109,7 +109,7 @@ app.post('/contact-leie', contactLimiter, async (req, res) => {
 
   try {
     await transporter.sendMail({
-      from: `"Studio Texnæs" <${process.env.SMTP_USER}>`,
+      from: `"Studio T" <${process.env.SMTP_USER}>`,
       to: 'leie@studio-texnaes.no',
       replyTo: email,
       subject: `Leieforespørsel fra ${name}`,
@@ -130,5 +130,5 @@ app.post('/contact-leie', contactLimiter, async (req, res) => {
 })
 
 app.listen(PORT, () => {
-  console.log(`Studio Texnæs running at http://localhost:${PORT}`)
+  console.log(`Studio T running at http://localhost:${PORT}`)
 })
