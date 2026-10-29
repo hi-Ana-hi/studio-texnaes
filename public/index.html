@@ -56,8 +56,13 @@
   <!-- Header -->
   <header>
     <a href="/" class="logo">Studio T</a>
-    <nav>
+    <button class="menu-toggle" type="button" aria-label="Åpne meny" aria-expanded="false" aria-controls="site-nav">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="site-nav" aria-label="Hovedmeny">
+      <button class="menu-close" type="button" aria-label="Lukk meny">&times;</button>
       <a href="/#om-oss">Om oss</a>
+      <a href="/#pedagoger">Pedagoger</a>
       <a href="/workshops">Workshops</a>
       <a href="/#leie">Leie</a>
       <a href="/#galleri">Galleri</a>
@@ -99,7 +104,7 @@
       <p class="om-oss-cta">Alle er velkomne!</p>
       <div class="hero-divider"></div>
 
-      <div class="instruktorer-intro">
+      <div class="instruktorer-intro" id="pedagoger">
         <h2>Bli bedre kjent med oss</h2>
         <p>Klikk deg videre til disipliner, skoler og profiler i studioet.</p>
       </div>
@@ -833,5 +838,6 @@
     }
   </script>
 
+  <script src="/menu.js"></script>
 </body>
 </html>
