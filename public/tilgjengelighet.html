@@ -75,7 +75,9 @@
           <p class="form-status" id="leieFormStatus" aria-live="polite"></p>
           <button type="submit">Send forespørsel</button>
         </div>
+        <p class="form-note" data-spam-note></p>
       </form>
+      <script src="/form-notes.js"></script>
 
       <div class="kontakt-links">
         <div class="kontakt-row">
@@ -125,7 +127,7 @@
         const data = await res.json()
 
         if (res.ok) {
-          status.textContent = 'Forespørselen er sendt. Vi tar kontakt snart.'
+          status.textContent = 'Forespørselen er sendt. Vi tar kontakt snart.' + ' ' + window.SPAM_NOTE
           status.classList.add('form-status--ok')
           form.reset()
         } else {

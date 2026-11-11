@@ -1453,6 +1453,13 @@ p {
   color: #8b4444;
 }
 
+.form-note {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
 .kart-wrapper {
   margin-top: 2rem;
   margin-bottom: 2rem;

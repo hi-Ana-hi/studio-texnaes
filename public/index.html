@@ -187,7 +187,7 @@
           <h3>Heels Workshop for nybegynnere</h3>
           <p>Nysgjerrig på heels-dans? To timer med Iryna Derkach – ingen erfaring nødvendig.</p>
           <p class="workshop-teaser-meta">450 kr · Bring a friend! 400 kr per person</p>
-          <span class="hero-primary-btn">Les mer og meld deg på</span>
+          <span class="hero-primary-btn">Se mer</span>
         </div>
       </a>
     </div>
@@ -379,7 +379,9 @@
           <p class="form-status" id="formStatus" aria-live="polite"></p>
           <button type="submit">Send melding</button>
         </div>
+        <p class="form-note" data-spam-note></p>
       </form>
+      <script src="/form-notes.js"></script>
 
       <div class="kontakt-links">
         <div class="kontakt-row">
@@ -458,7 +460,7 @@
         const data = await res.json()
 
         if (res.ok) {
-          status.textContent = 'Meldingen er sendt. Vi tar kontakt snart.'
+          status.textContent = 'Meldingen er sendt. Vi tar kontakt snart.' + ' ' + window.SPAM_NOTE
           status.classList.add('form-status--ok')
           form.reset()
         } else {
