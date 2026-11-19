@@ -165,7 +165,8 @@
         const data = await res.json()
 
         if (res.ok) {
-          status.textContent = 'Påmeldingen er sendt. Vi bekrefter på e-post så snart vi kan.' + ' ' + window.SPAM_NOTE
+          status.textContent = 'Påmeldingen er sendt. Vi bekrefter på e-post så snart vi kan.' + ' '
+          window.appendSpamNote(status)
           status.classList.add('form-status--ok')
           form.reset()
         } else {

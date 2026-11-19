@@ -127,7 +127,8 @@
         const data = await res.json()
 
         if (res.ok) {
-          status.textContent = 'Forespørselen er sendt. Vi tar kontakt snart.' + ' ' + window.SPAM_NOTE
+          status.textContent = 'Forespørselen er sendt. Vi tar kontakt snart.' + ' '
+          window.appendSpamNote(status)
           status.classList.add('form-status--ok')
           form.reset()
         } else {
@@ -168,11 +169,14 @@
       document.getElementById('cookieBanner').classList.remove('show')
     }
 
-    if (localStorage.getItem('google-content-consent') === 'accepted') {
-      loadCalendar()
-    } else if (!localStorage.getItem('google-content-consent')) {
-      document.getElementById('cookieBanner').classList.add('show')
-    }
+    // Vent til hele siden er lastet, siden cookie-banneret ligger lenger ned i HTML-en
+    document.addEventListener('DOMContentLoaded', () => {
+      if (localStorage.getItem('google-content-consent') === 'accepted') {
+        loadCalendar()
+      } else if (!localStorage.getItem('google-content-consent')) {
+        document.getElementById('cookieBanner').classList.add('show')
+      }
+    })
   </script>
 
   <!-- Footer -->

@@ -460,7 +460,8 @@
         const data = await res.json()
 
         if (res.ok) {
-          status.textContent = 'Meldingen er sendt. Vi tar kontakt snart.' + ' ' + window.SPAM_NOTE
+          status.textContent = 'Meldingen er sendt. Vi tar kontakt snart.' + ' '
+          window.appendSpamNote(status)
           status.classList.add('form-status--ok')
           form.reset()
         } else {
