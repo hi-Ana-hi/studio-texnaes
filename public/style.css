@@ -1685,6 +1685,21 @@ footer span {
   text-decoration: none;
 }
 
+.modal--small {
+  max-width: 460px;
+  text-align: center;
+}
+
+.modal--small h2 {
+  margin-bottom: 1rem;
+}
+
+.modal--small .thanks-spam {
+  margin-top: 1.2rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
 .modal-close {
   position: absolute;
   top: 1.2rem;

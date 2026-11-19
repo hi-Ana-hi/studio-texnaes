@@ -127,10 +127,10 @@
         const data = await res.json()
 
         if (res.ok) {
-          status.textContent = 'Forespørselen er sendt. Vi tar kontakt snart.' + ' '
-          window.appendSpamNote(status)
+          status.textContent = 'Forespørselen er sendt. Vi tar kontakt snart.'
           status.classList.add('form-status--ok')
           form.reset()
+          window.showThanksPopup()
         } else {
           status.textContent = data.error || 'Noe gikk galt.'
           status.classList.add('form-status--error')
